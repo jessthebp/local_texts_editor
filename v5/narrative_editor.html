@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+  <title>ARG Narrative Media Editor</title>
+  <link rel="stylesheet" href="narrative_editor.css" />
+</head>
+
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <span class="brand-mark">ARG</span>
+
+      <div>
+        <div class="brand-title">Narrative Media Editor</div>
+        <div class="brand-subtitle">
+          Character-aware modular storytelling canvas
+        </div>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <span id="save-status" class="save-status">Local project state</span>
+      <button id="new-project-btn" class="btn btn-secondary" type="button">
+        + New
+      </button>
+
+      <button id="add-phone-btn" class="btn btn-secondary" type="button">
+        + Phone Thread
+      </button>
+
+      <button id="add-heading-btn" class="btn btn-secondary" type="button">
+        + Heading
+      </button>
+
+      <div class="export-menu-wrapper">
+        <button
+          id="export-menu-btn"
+          class="btn btn-cyan"
+          type="button"
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-controls="export-menu"
+        >
+          Export ▾
+        </button>
+        <div id="export-menu" class="export-menu" role="menu" hidden>
+          <button id="export-btn" class="export-menu-item" type="button" role="menuitem">
+            View Project JSON
+          </button>
+          <button id="export-project-json-btn" class="export-menu-item" type="button" role="menuitem">
+            Download Project JSON
+          </button>
+          <button id="export-reader-json-btn" class="export-menu-item" type="button" role="menuitem">
+            Download Reader JSON
+          </button>
+          <button id="export-standalone-html-btn" class="export-menu-item" type="button" role="menuitem">
+            Download Standalone HTML
+          </button>
+        </div>
+      </div>
+      <button id="undo-btn" class="btn btn-secondary" title="Undo" type="button">
+  ↶ Undo
+</button>
+
+<button id="redo-btn" class="btn btn-secondary" title="Redo" type="button">
+  ↷ Redo
+</button>
+
+<button id="import-btn" class="btn btn-secondary" type="button">
+  Import JSON
+</button>
+    </div>
+  </header>
+
+  <main class="editor-layout"><aside class="sidebar">
+  <nav class="tabs-nav" aria-label="Editor sidebar">
+    <button
+      class="tab-btn active"
+      type="button"
+      data-sidebar-tab="modules"
+    >
+      Modules
+    </button>
+
+    <button
+      class="tab-btn"
+      type="button"
+      data-sidebar-tab="profiles"
+    >
+      Profiles
+    </button>
+
+    <button
+      class="tab-btn"
+      type="button"
+      data-sidebar-tab="outline"
+    >
+      Outline
+    </button>
+
+    <button
+      class="tab-btn"
+      type="button"
+      data-sidebar-tab="project"
+    >
+      Project
+    </button>
+  </nav>
+
+  <section
+    id="sidebar-tab-modules"
+    class="tab-pane active"
+    data-sidebar-pane="modules"
+  >
+    <div class="sidebar-heading-row">
+      <h2>Module Library</h2>
+    </div>
+
+    <div class="form-group">
+      <label for="module-search-input">Search modules</label>
+      <input
+        id="module-search-input"
+        class="form-control"
+        type="search"
+        placeholder="Phone, report, voicemail..."
+      />
+    </div>
+
+    <div class="module-library-category">
+      <div class="module-library-category-title">
+        Narrative
+      </div>
+
+      <button
+        class="module-type-btn"
+        type="button"
+        data-category="narrative"
+        data-module-type="scene-heading"
+      >
+        <span class="module-type-icon">T</span>
+        <span>
+          <strong>Scene Heading</strong>
+          <small>Chapter, date, location, or scene marker</small>
+        </span>
+      </button>
+
+      <button
+        class="module-type-btn"
+        type="button"
+        data-category="narrative"
+        data-module-type="note-card"
+      >
+        <span class="module-type-icon">▤</span>
+        <span>
+          <strong>Note Card</strong>
+          <small>Evidence annotation or author note</small>
+        </span>
+      </button>
+
+      <button
+        class="module-type-btn"
+        type="button"
+        data-category="narrative"
+        data-module-type="handwritten-note"
+      >
+        <span class="module-type-icon">✎</span>
+        <span>
+          <strong>Handwritten Note</strong>
+          <small>Diary entry, letter, or recovered note</small>
+        </span>
+      </button>
+    </div>
+
+    <div class="module-library-category">
+      <div class="module-library-category-title">
+        Communication
+      </div>
+
+      <button
+        class="module-type-btn"
+        type="button"
+        data-category="communication"
+        data-module-type="phone-thread"
+      >
+        <span class="module-type-icon">▣</span>
+        <span>
+          <strong>Phone Thread</strong>
+          <small>Character-aware text-message conversations</small>
+        </span>
+      </button>
+
+      <button
+        class="module-type-btn"
+        type="button"
+        data-category="communication"
+        data-module-type="social-media-post"
+      >
+        <span class="module-type-icon">♥</span>
+        <span>
+          <strong>Social Media Post</strong>
+          <small>Microblog, photo feed, or Web 1.0 profile post</small>
+        </span>
+      </button>
+
+      <button
+        class="module-type-btn"
+        type="button"
+        data-category="communication"
+        data-module-type="email-document"
+      >
+        <span class="module-type-icon">✉</span>
+        <span>
+          <strong>Email / Official Document</strong>
+          <small>Email, internal memo, or classified correspondence</small>
+        </span>
+      </button>
+
+      <button
+        class="module-type-btn"
+        type="button"
+        data-category="communication"
+        data-module-type="forum-post"
+      >
+        <span class="module-type-icon">#</span>
+        <span>
+          <strong>Forum / Image Board</strong>
+          <small>Early web forums, image boards, discussion threads</small>
+        </span>
+      </button>
+    </div>
+
+    <div class="module-library-category">
+      <div class="module-library-category-title">
+        Evidence & Records
+      </div>
+
+      <button
+        class="module-type-btn"
+        type="button"
+        data-category="evidence"
+        data-module-type="evidence-media"
+      >
+        <span class="module-type-icon">▧</span>
+        <span>
+          <strong>Evidence Photo / Media</strong>
+          <small>Polaroids, recovered photos, CCTV frames</small>
+        </span>
+      </button>
+
+      <button
+        class="module-type-btn"
+        type="button"
+        data-category="evidence"
+        data-module-type="official-report"
+      >
+        <span class="module-type-icon">▤</span>
+        <span>
+          <strong>Official Report</strong>
+          <small>Incident, autopsy, missing-person, evidence paperwork</small>
+        </span>
+      </button>
+
+      <button
+        class="module-type-btn"
+        type="button"
+        data-category="evidence"
+        data-module-type="transaction-record"
+      >
+        <span class="module-type-icon">$</span>
+        <span>
+          <strong>Bank Statement / Receipt</strong>
+          <small>Purchases, timelines, locations, withdrawals</small>
+        </span>
+      </button>
+
+      <button
+        class="module-type-btn"
+        type="button"
+        data-category="evidence"
+        data-module-type="newspaper-article"
+      >
+        <span class="module-type-icon">▤</span>
+        <span>
+          <strong>Newspaper Article</strong>
+          <small>Broadsheet, modern local news, Buzz-style web article</small>
+        </span>
+      </button>
+      <button
+  class="module-type-btn"
+  type="button"
+  data-category="evidence"
+  data-module-type="voice-message"
+>
+  <span class="module-type-icon">☎</span>
+
+  <span>
+    <strong>Voice Message / Voicemail</strong>
+    <small>Phone artifact with caller, call ID, duration, and transcript</small>
+  </span>
+</button>
+
+      <button
+        class="module-type-btn"
+        type="button"
+        data-category="evidence"
+        data-module-type="broken-link"
+      >
+        <span class="module-type-icon">!</span>
+        <span>
+          <strong>Broken Link</strong>
+          <small>404 pages, removed records, failed web previews</small>
+        </span>
+      </button>
+    </div>
+
+    <div class="module-library-category">
+      <div class="module-library-category-title">
+        Audio & Systems
+      </div>
+
+      <button
+        class="module-type-btn"
+        type="button"
+        data-category="audio"
+        data-module-type="transcript"
+      >
+        <span class="module-type-icon">◖</span>
+        <span>
+          <strong>Transcript / Audio Log</strong>
+          <small>Voicemail, police interview, podcast, radio, hearing</small>
+        </span>
+      </button>
+
+      <button
+        class="module-type-btn"
+        type="button"
+        data-category="audio"
+        data-module-type="terminal"
+      >
+        <span class="module-type-icon">&gt;_</span>
+        <span>
+          <strong>Terminal / Console</strong>
+          <small>Queries, logs, system access, conversation</small>
+        </span>
+      </button>
+    </div>
+  </section>
+
+  <section
+    id="sidebar-tab-profiles"
+    class="tab-pane"
+    data-sidebar-pane="profiles"
+  >
+    <div class="sidebar-heading-row">
+      <h2>Characters</h2>
+      <button
+        id="add-character-btn"
+        class="icon-btn"
+        type="button"
+        title="Create character"
+      >
+        +
+      </button>
+    </div>
+
+    <p class="sidebar-help">
+      Characters provide the canonical color, avatar, device, and identity
+      defaults used across modules.
+    </p>
+
+    <div id="character-list" class="character-list"></div>
+
+    <hr class="divider" />
+
+    <div class="sidebar-heading-row">
+      <h2>Social Profiles</h2>
+      <button
+        id="add-social-profile-btn"
+        class="icon-btn"
+        type="button"
+        title="Create social profile"
+      >
+        +
+      </button>
+    </div>
+
+    <p class="sidebar-help">
+      Shared accounts for social-media posts. Link an account to a character
+      to inherit their visual identity.
+    </p>
+
+    <div id="social-profile-list" class="profile-list"></div>
+
+    <hr class="divider" />
+
+    <div class="sidebar-heading-row">
+      <h2>Newspaper Publications</h2>
+      <button
+        id="add-newspaper-profile-btn"
+        class="icon-btn"
+        type="button"
+        title="Create publication profile"
+      >
+        +
+      </button>
+    </div>
+
+    <p class="sidebar-help">
+      Shared publication styles for broadsheets, modern news sites, and
+      Buzz-style web articles.
+    </p>
+
+    <div id="newspaper-profile-list" class="profile-list"></div>
+  </section>
+
+  <section
+    id="sidebar-tab-outline"
+    class="tab-pane"
+    data-sidebar-pane="outline"
+  >
+    <div class="sidebar-heading-row">
+      <h2>Outline &amp; Search</h2>
+    </div>
+    <input
+      id="outline-search-input"
+      class="form-control"
+      type="search"
+      placeholder="Search all module content…"
+      aria-label="Search all module content"
+    />
+    <div id="outline-list" class="outline-list" role="list"></div>
+  </section>
+
+  <section
+    id="sidebar-tab-project"
+    class="tab-pane"
+    data-sidebar-pane="project"
+  >
+    <div class="sidebar-heading-row">
+      <h2>Project Settings</h2>
+    </div>
+
+    <div class="form-group">
+      <label>Project title</label>
+      <input
+        id="project-title-input"
+        class="form-control"
+        type="text"
+      />
+    </div>
+
+    <div class="form-group">
+      <label>Page background</label>
+      <input
+        id="page-background-input"
+        class="color-control"
+        type="color"
+      />
+    </div>
+
+    <div class="form-group">
+      <label>Canvas background</label>
+      <input
+        id="canvas-background-input"
+        class="color-control"
+        type="color"
+      />
+    </div>
+
+    <div class="form-group">
+      <label>Canvas width</label>
+      <select id="canvas-width-select" class="form-control">
+        <option value="narrow">Narrow</option>
+        <option value="standard">Standard</option>
+        <option value="wide">Wide</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="background-shape-select">Background shapes</label>
+      <select id="background-shape-select" class="form-control">
+        <option value="none">None</option>
+        <option value="dots">Dots</option>
+        <option value="grid">Grid</option>
+        <option value="diagonal">Diagonal lines</option>
+        <option value="waves">Waves</option>
+        <option value="triangles">Triangles</option>
+        <option value="circles">Circles</option>
+        <option value="hexagons">Hexagons</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Reader font</label>
+      <select id="font-family-select" class="form-control">
+        <option value="system">Modern system sans</option>
+        <option value="serif">Classic serif</option>
+        <option value="mono">Monospace / terminal</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="reader-text-size-select">Reader text size</label>
+      <select id="reader-text-size-select" class="form-control">
+        <option value="small">Small</option>
+        <option value="normal">Normal</option>
+        <option value="large">Large</option>
+        <option value="xlarge">Extra large</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="reader-line-spacing-select">Reader line spacing</label>
+      <select id="reader-line-spacing-select" class="form-control">
+        <option value="tight">Tight</option>
+        <option value="normal">Normal</option>
+        <option value="relaxed">Relaxed</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <div class="project-settings-group">
+        <div class="project-settings-group-title">Visual Overlays</div>
+
+        <label class="settings-toggle">
+          <input
+            id="overlay-scanlines"
+            type="checkbox"
+          />
+          <span>CRT scanlines</span>
+        </label>
+
+        <label class="settings-toggle">
+          <input
+            id="overlay-vignette"
+            type="checkbox"
+          />
+          <span>Vignette shadow</span>
+        </label>
+
+        <label class="settings-toggle">
+          <input
+            id="overlay-grain"
+            type="checkbox"
+          />
+          <span>Film grain</span>
+        </label>
+
+        <label class="settings-toggle">
+          <input
+            id="overlay-crt-flicker"
+            type="checkbox"
+          />
+          <span>Subtle CRT flicker</span>
+        </label>
+
+        <label class="settings-toggle">
+          <input
+            id="overlay-paper-texture"
+            type="checkbox"
+          />
+          <span>Paper texture</span>
+        </label>
+
+        <label class="settings-toggle">
+          <input
+            id="reduced-motion"
+            type="checkbox"
+          />
+          <span>Reduce animation</span>
+        </label>
+      </div>
+
+      <hr class="divider" />
+
+      <div class="project-settings-group">
+        <div class="project-settings-group-title">Reader Effects</div>
+
+        <label class="settings-toggle">
+          <input
+            id="reader-redaction-reveal"
+            type="checkbox"
+          />
+          <span>Reveal redactions on hover</span>
+        </label>
+
+        <label class="settings-toggle">
+          <input
+            id="reader-image-glitch"
+            type="checkbox"
+          />
+          <span>Glitch evidence media on hover</span>
+        </label>
+
+        <label class="settings-toggle">
+          <input
+            id="reader-evidence-focus"
+            type="checkbox"
+          />
+          <span>Enable evidence focus blur</span>
+        </label>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="sidebar-heading-row">
+      <h2>Project Tools</h2>
+    </div>
+
+    <button id="validate-project-btn" class="btn btn-secondary btn-full" type="button">
+      Validate Project
+    </button>
+
+    <button id="restore-backup-btn" class="btn btn-secondary btn-full mt-6" type="button">
+      Restore Latest Backup
+    </button>
+
+    <button id="clear-autosave-btn" class="btn btn-secondary btn-full mt-6" type="button">
+      Clear Local Autosave
+    </button>
+
+    <button id="reset-demo-btn" class="btn btn-danger btn-full mt-6" type="button">
+      Reset Demo Data
+    </button>
+
+    <pre id="project-validation-output" class="validation-output"></pre>
+
+    <hr class="divider" />
+
+    <div class="sidebar-heading-row">
+      <h2>Project Health</h2>
+      <button
+        id="refresh-project-health-btn"
+        class="icon-btn"
+        type="button"
+        title="Refresh project health"
+        aria-label="Refresh project health"
+      >
+        ↻
+      </button>
+    </div>
+    <div id="project-health-panel" class="project-health-panel"></div>
+
+    <div class="shortcut-help">
+      <div class="shortcut-help-title">Keyboard Shortcuts</div>
+      <div><kbd>Ctrl</kbd>/<kbd>⌘</kbd> + <kbd>S</kbd> Save locally</div>
+      <div><kbd>Ctrl</kbd>/<kbd>⌘</kbd> + <kbd>Z</kbd> Undo</div>
+      <div><kbd>Ctrl</kbd>/<kbd>⌘</kbd> + <kbd>Shift</kbd> + <kbd>Z</kbd> Redo</div>
+      <div><kbd>Alt</kbd> + <kbd>↑</kbd> Move focused module up</div>
+      <div><kbd>Alt</kbd> + <kbd>↓</kbd> Move focused module down</div>
+      <div><kbd>Alt</kbd> + <kbd>D</kbd> Duplicate focused module</div>
+      <div><kbd>Alt</kbd> + <kbd>C</kbd> Collapse or expand focused module</div>
+    </div>
+  </section>
+  </aside>
+
+  <section class="workspace">
+  <div class="workspace-toolbar">
+    <div>
+      <h1 id="project-title"></h1>
+      <p id="module-count-label"></p>
+    </div>
+  </div>
+  <div id="canvas" class="story-canvas"></div>
+</section>
+
+<aside class="inspector" aria-label="Module inspector">
+  <div class="inspector-sticky-shell">
+    <div class="inspector-header">
+      <div>
+        <div class="inspector-title">Module Inspector</div>
+        <div id="inspector-subtitle" class="inspector-subtitle"></div>
+      </div>
+      <button
+        id="focus-selected-module-btn"
+        class="icon-btn"
+        type="button"
+        title="Focus selected module on canvas"
+        aria-label="Focus selected module on canvas"
+      >⌖</button>
+    </div>
+    <div id="inspector-body" class="inspector-body"></div>
+  </div>
+</aside>
+</main>
+
+<div
+  id="editor-toast"
+  class="editor-toast"
+  role="status"
+  aria-live="polite"
+  aria-atomic="true"
+></div>
+
+<dialog id="module-preview-dialog" class="module-preview-dialog">
+  <div class="module-preview-shell">
+    <div class="module-preview-toolbar">
+      <div>
+        <div class="module-preview-title">Module Preview</div>
+        <div id="module-preview-subtitle" class="module-preview-subtitle">
+          Reader-facing appearance
+        </div>
+      </div>
+      <button
+        id="close-module-preview-btn"
+        class="icon-btn"
+        type="button"
+        aria-label="Close preview"
+      >
+        ×
+      </button>
+    </div>
+    <div id="module-preview-body" class="module-preview-body"></div>
+  </div>
+</dialog>
+
+<dialog id="export-dialog" class="modal">
+    <form method="dialog" class="modal-card modal-card-wide">
+      <div class="modal-header">
+        <h2 id="export-dialog-title">Project JSON</h2>
+        <button class="icon-btn" value="cancel" aria-label="Close dialog" type="submit">
+          ×
+        </button>
+      </div>
+
+      <textarea
+        id="export-output"
+        class="form-control export-output"
+        readonly
+      ></textarea>
+
+      <div class="modal-actions">
+        <button id="copy-export-btn" value="default" class="btn btn-cyan" type="button">
+          Copy JSON
+        </button>
+        <button id="reader-export-btn" class="btn btn-secondary" type="button">
+          Reader Export
+        </button>
+        <button value="cancel" class="btn btn-secondary" type="submit">Close</button>
+      </div>
+    </form>
+</dialog>
+
+<dialog id="new-project-dialog" class="modal">
+  <form id="new-project-form" class="modal-card">
+    <div class="modal-header">
+      <h2>New chapter or project</h2>
+    </div>
+    <div class="form-group">
+      <label for="new-project-title">Title</label>
+      <input id="new-project-title" class="form-control" type="text" placeholder="Chapter 2" />
+    </div>
+    <div class="form-group">
+      <label for="new-project-kind">Start from</label>
+      <select id="new-project-kind" class="form-control">
+        <option value="chapter">New chapter (keep characters, profiles and settings)</option>
+        <option value="project">Blank project (start completely fresh)</option>
+      </select>
+    </div>
+    <p class="sidebar-help">The current work is replaced on the canvas. Undo restores it, and a backup is kept.</p>
+    <div class="modal-actions">
+      <button id="new-project-cancel" class="btn btn-secondary" type="button">Cancel</button>
+      <button class="btn btn-cyan" type="submit">Create</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="import-dialog" class="modal">
+  <form method="dialog" class="modal-card modal-card-wide">
+    <div class="modal-header">
+      <h2>Import Project JSON</h2>
+      <button class="icon-btn" value="cancel" aria-label="Close dialog" type="submit">×</button>
+    </div>
+    <p class="sidebar-help">Paste a project JSON export below, validate it, then load it into the editor.</p>
+    <textarea id="import-input" class="form-control export-output" aria-label="Project JSON to import"></textarea>
+    <pre id="import-validation-output" class="validation-output"></pre>
+    <div class="modal-actions">
+      <button id="validate-import-btn" class="btn btn-secondary" type="button">Validate JSON</button>
+      <button id="load-import-btn" class="btn btn-cyan" type="button">Load Project</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="character-dialog" class="modal">
+  <form method="dialog" class="modal-card">
+    <div class="modal-header">
+      <h2 id="character-dialog-title">Create Character</h2>
+      <button class="icon-btn" value="cancel" aria-label="Close dialog" type="submit">×</button>
+    </div>
+    <div id="character-dialog-body"></div>
+    <div class="modal-actions">
+      <button id="save-character-btn" class="btn btn-cyan" type="button">Save Character</button>
+      <button class="btn btn-secondary" value="cancel" type="submit">Cancel</button>
+    </div>
+  </form>
+</dialog>
+
+<template id="character-form-template">
+  <div class="form-group">
+    <label for="character-name">Name</label>
+    <input id="character-name" class="form-control" type="text" required />
+  </div>
+  <div class="form-group">
+    <label for="character-short-name">Short name</label>
+    <input id="character-short-name" class="form-control" type="text" />
+  </div>
+  <div class="form-group">
+    <label for="character-color">Primary color</label>
+    <input id="character-color" class="color-control" type="color" />
+  </div>
+  <div class="form-group">
+    <label for="character-color-soft">Soft color</label>
+    <input id="character-color-soft" class="color-control" type="color" />
+  </div>
+  <div class="form-group">
+    <label for="character-avatar">Avatar</label>
+    <input id="character-avatar" class="form-control" type="text" maxlength="3" />
+  </div>
+</template>
+
+<dialog id="social-profile-dialog" class="modal">
+  <form method="dialog" class="modal-card">
+    <div class="modal-header">
+      <h2 id="social-profile-dialog-title">Create Social Profile</h2>
+      <button class="icon-btn" value="cancel" aria-label="Close dialog" type="submit">×</button>
+    </div>
+    <div id="social-profile-dialog-body"></div>
+    <div class="modal-actions">
+      <button id="save-social-profile-btn" class="btn btn-cyan" type="button">Save Profile</button>
+      <button class="btn btn-secondary" value="cancel" type="submit">Cancel</button>
+    </div>
+  </form>
+</dialog>
+
+<template id="social-profile-form-template">
+  <div class="form-group">
+    <label for="social-profile-display-name">Display name</label>
+    <input id="social-profile-display-name" class="form-control" type="text" />
+  </div>
+  <div class="form-group">
+    <label for="social-profile-handle">Handle</label>
+    <input id="social-profile-handle" class="form-control" type="text" />
+  </div>
+  <div class="form-group">
+    <label for="social-profile-platform">Platform</label>
+    <select id="social-profile-platform" class="form-control">
+      <option value="microblog">Microblog</option>
+      <option value="photo">Photo feed</option>
+      <option value="web1">Web 1.0 profile</option>
+      <option value="chat">Chat server</option>
+      <option value="video">Video site</option>
+      <option value="retro">Retro social page</option>
+      <option value="comment">Comment thread</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="social-profile-owner">Linked character</label>
+    <select id="social-profile-owner" class="form-control"></select>
+  </div>
+  <div class="form-group">
+    <label for="social-profile-avatar">Avatar</label>
+    <input id="social-profile-avatar" class="form-control" type="text" />
+  </div>
+  <div class="form-group">
+    <label for="social-profile-followers">Follower label</label>
+    <input id="social-profile-followers" class="form-control" type="text" />
+  </div>
+  <div class="form-group">
+    <label for="social-profile-primary-color">Primary color</label>
+    <input id="social-profile-primary-color" class="color-control" type="color" />
+  </div>
+  <div class="form-group">
+    <label for="social-profile-soft-color">Soft color</label>
+    <input id="social-profile-soft-color" class="color-control" type="color" />
+  </div>
+  <div class="form-group">
+    <label for="social-profile-bio">Bio</label>
+    <textarea id="social-profile-bio" class="form-control"></textarea>
+  </div>
+</template>
+
+<dialog id="newspaper-profile-dialog" class="modal">
+  <form method="dialog" class="modal-card">
+    <div class="modal-header">
+      <h2 id="newspaper-profile-dialog-title">Create Publication</h2>
+      <button class="icon-btn" value="cancel" aria-label="Close dialog" type="submit">×</button>
+    </div>
+    <div id="newspaper-profile-dialog-body"></div>
+    <div class="modal-actions">
+      <button id="save-newspaper-profile-btn" class="btn btn-cyan" type="button">Save Publication</button>
+      <button class="btn btn-secondary" value="cancel" type="submit">Cancel</button>
+    </div>
+  </form>
+</dialog>
+
+<template id="newspaper-profile-form-template">
+  <div class="form-group">
+    <label for="newspaper-profile-name">Publication name</label>
+    <input id="newspaper-profile-name" class="form-control" type="text" />
+  </div>
+  <div class="form-group">
+    <label for="newspaper-profile-style">Style</label>
+    <select id="newspaper-profile-style" class="form-control">
+      <option value="broadsheet">Broadsheet</option>
+      <option value="modern">Modern news site</option>
+      <option value="buzz">Buzz-style site</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="newspaper-profile-masthead-color">Masthead color</label>
+    <input id="newspaper-profile-masthead-color" class="color-control" type="color" />
+  </div>
+  <div class="form-group">
+    <label for="newspaper-profile-accent-color">Accent color</label>
+    <input id="newspaper-profile-accent-color" class="color-control" type="color" />
+  </div>
+  <div class="form-group">
+    <label for="newspaper-profile-city-line">City line</label>
+    <input id="newspaper-profile-city-line" class="form-control" type="text" />
+  </div>
+  <div class="form-group">
+    <label for="newspaper-profile-slogan">Slogan</label>
+    <input id="newspaper-profile-slogan" class="form-control" type="text" />
+  </div>
+  <label class="form-group">
+    <input id="newspaper-profile-show-ads" type="checkbox" />
+    Show advertisements
+  </label>
+</template>
+
+  <script src="narrative_editor.js"></script>
+</body>
+</html>

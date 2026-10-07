@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ARG & Narrative Media Layout Editor</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="./narrative_editor.css">
+</head>
+<body>
+
+  <header>
+    <div class="brand">
+      <div class="brand-icon"><i class="fa-solid fa-layer-group"></i></div>
+      <div>
+        <div class="brand-title">ARG & Narrative Media Editor</div>
+        <div class="brand-subtitle">Interactive Storytelling Canvas Engine</div>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <button class="btn btn-secondary" onclick="openModal('modal-import')"><i class="fa-solid fa-file-import"></i> Import JSON</button>
+      <button class="btn btn-secondary" onclick="exportJSON()"><i class="fa-solid fa-file-export"></i> Export JSON</button>
+      <button class="btn btn-cyan" onclick="exportStandaloneHTML()"><i class="fa-solid fa-code"></i> Export Standalone Page</button>
+    </div>
+  </header>
+
+  <div class="app-container">
+
+    <aside class="sidebar">
+      <div class="tabs-nav">
+        <button class="tab-btn active" id="btn-tab-palette" onclick="switchTab('tab-palette')"><i class="fa-solid fa-plus"></i> Blocks</button>
+        <button class="tab-btn" id="btn-tab-admin" onclick="switchTab('tab-admin')"><i class="fa-solid fa-users-gear"></i> Admin Profiles</button>
+        <button class="tab-btn" id="btn-tab-page" onclick="switchTab('tab-page')"><i class="fa-solid fa-palette"></i> Page Settings</button>
+      </div>
+
+      <!-- TAB 1: PALETTE -->
+      <div class="tab-pane active" id="tab-palette">
+        <span class="section-label">Narrative Modules</span>
+
+        <button class="block-btn" onclick="addModule('heading')">
+          <div class="block-icon"><i class="fa-solid fa-heading"></i></div>
+          <div>
+            <div class="block-title">Scene Heading / Title</div>
+            <div class="block-desc">Chapter headers & date markers</div>
+          </div>
+        </button>
+
+        <button class="block-btn" onclick="addModule('text_message')">
+          <div class="block-icon"><i class="fa-solid fa-comments"></i></div>
+          <div>
+            <div class="block-title">Text Message Thread</div>
+            <div class="block-desc">Interactive reorderable bubbles & receipts</div>
+          </div>
+        </button>
+
+        <button class="block-btn" onclick="addModule('newspaper')">
+          <div class="block-icon"><i class="fa-regular fa-newspaper"></i></div>
+          <div>
+            <div class="block-title">Newspaper Article</div>
+            <div class="block-desc">Vintage/Modern, article focus/blur</div>
+          </div>
+        </button>
+
+        <button class="block-btn" onclick="addModule('evidence_photo')">
+          <div class="block-icon"><i class="fa-solid fa-camera-retro"></i></div>
+          <div>
+            <div class="block-title">Evidence Photo / Media</div>
+            <div class="block-desc">Polaroids & CCTV asset blocks</div>
+          </div>
+        </button>
+
+        <button class="block-btn" onclick="addModule('broken_link')">
+          <div class="block-icon"><i class="fa-solid fa-link-slash"></i></div>
+          <div>
+            <div class="block-title">Broken Link Card</div>
+            <div class="block-desc">404 Not Found & error previews</div>
+          </div>
+        </button>
+
+        <button class="block-btn" onclick="addModule('email')">
+          <div class="block-icon"><i class="fa-regular fa-envelope"></i></div>
+          <div>
+            <div class="block-title">Email / Official Doc</div>
+            <div class="block-desc">Classified memo headers</div>
+          </div>
+        </button>
+
+        <button class="block-btn" onclick="addModule('social')">
+          <div class="block-icon"><i class="fa-brands fa-twitter"></i></div>
+          <div>
+            <div class="block-title">Social Media Post</div>
+            <div class="block-desc">Twitter/Instagram style feeds</div>
+          </div>
+        </button>
+
+        <button class="block-btn" onclick="addModule('voicemail')">
+          <div class="block-icon"><i class="fa-solid fa-microphone-lines"></i></div>
+          <div>
+            <div class="block-title">Voicemail Log</div>
+            <div class="block-desc">Audio logs & transcripts</div>
+          </div>
+        </button>
+      </div>
+
+      <!-- TAB 2: ADMIN MANAGEMENT -->
+      <div class="tab-pane" id="tab-admin">
+        <div class="admin-section-header">
+          <span class="section-label margin-none">Phone Profiles</span>
+          <button class="btn btn-pink btn-xs" onclick="openCreatePhoneModal()"><i class="fa-solid fa-plus"></i> New Phone</button>
+        </div>
+        <div id="admin-phones-list"></div>
+
+        <hr class="divider">
+
+        <div class="admin-section-header">
+          <span class="section-label margin-none">Social Accounts</span>
+          <button class="btn btn-pink btn-xs" onclick="openCreateSocialModal()"><i class="fa-solid fa-plus"></i> New Account</button>
+        </div>
+        <div id="admin-socials-list"></div>
+
+        <hr class="divider">
+
+        <div class="admin-section-header">
+          <span class="section-label margin-none">Newspaper Publications</span>
+          <button class="btn btn-pink btn-xs" onclick="openCreatePaperModal()"><i class="fa-solid fa-plus"></i> New Press</button>
+        </div>
+        <div id="admin-papers-list"></div>
+      </div>
+
+      <!-- TAB 3: PAGE GLOBAL SETTINGS -->
+      <div class="tab-pane" id="tab-page">
+        <span class="section-label">Global Reader Styling</span>
+
+        <div class="form-group">
+          <label>Page Title</label>
+          <input type="text" id="page-title-field" class="form-control" value="Chapter 1: The Incident" oninput="updatePageTitle(this.value)">
+        </div>
+
+        <div class="form-group">
+          <label>Page Background Preset</label>
+          <select id="page-bg-preset" class="form-control" onchange="applyPageBgPreset(this.value)">
+            <option value="#0c0c12">Slate Dark (#0c0c12)</option>
+            <option value="#2C2C2C">Slate Gray (#2C2C2C)</option>
+            <option value="#f4ebd9">Vintage Parchment (#f4ebd9)</option>
+            <option value="#050505">Terminal Matrix (#050505)</option>
+            <option value="#1a0808">Blood Red (#1a0808)</option>
+            <option value="#0a1128">Cyber Dark Blue (#0a1128)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Container Width</label>
+          <select id="page-width-select" class="form-control" onchange="updatePageWidth(this.value)">
+            <option value="550px">Narrow (550px)</option>
+            <option value="680px" selected>Standard (680px)</option>
+            <option value="850px">Wide (850px)</option>
+            <option value="100%">Full Width (100%)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Global Font Family</label>
+          <select id="page-font-select" class="form-control" onchange="updatePageFont(this.value)">
+            <option value="-apple-system, BlinkMacSystemFont, sans-serif">Modern System Sans</option>
+            <option value="Georgia, 'Times New Roman', serif">Classic Serif (Times)</option>
+            <option value="'Courier New', Courier, monospace">Vintage Typewriter</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Visual Overlay Effect</label>
+          <select id="page-overlay-select" class="form-control" onchange="updatePageOverlay(this.value)">
+            <option value="none">None / Clean</option>
+            <option value="texture-scanlines">CRT Scanlines Overlay</option>
+            <option value="texture-vignette">Vignette Dark Shadow</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Next Chapter Footer URL</label>
+          <input type="text" id="page-next-url-field" class="form-control" value="chapter2.html" oninput="updateNextUrl(this.value)">
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- Center Workspace -->
+    <main class="workspace">
+      <div id="page-frame">
+        <div id="canvas"></div>
+        <div class="canvas-footer">
+          <a id="footer-next-link" href="#" class="footer-link">
+            Continue to Next Chapter &rarr;
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <aside class="inspector">
+      <div class="inspector-header">
+        <span><i class="fa-solid fa-sliders"></i> Module Customizer</span>
+        <span id="save-badge" class="badge-saved">Saved</span>
+      </div>
+      <div class="inspector-body" id="inspector-content">
+        <div class="inspector-empty">
+          <i class="fa-solid fa-arrow-pointer empty-icon"></i>
+          <p>Click any module block on the central canvas to inspect and edit its properties.</p>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- Phone Modal -->
+  <div class="modal-overlay" id="modal-phone">
+    <div class="modal-box">
+      <div class="modal-header">
+        <span id="modal-phone-title">Create Phone Profile</span>
+        <button class="action-btn" onclick="closeModal('modal-phone')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <input type="hidden" id="edit-phone-id">
+      <div class="form-group">
+        <label>Character / Owner Name</label>
+        <input type="text" id="phone-owner-input" class="form-control" placeholder="e.g. Ashley">
+      </div>
+      <div class="grid-2">
+        <div class="form-group">
+          <label>OS Layout</label>
+          <select id="phone-type-input" class="form-control">
+            <option value="iphone">iPhone (iOS)</option>
+            <option value="android">Android OS</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Theme Mode</label>
+          <select id="phone-theme-input" class="form-control">
+            <option value="light">Light Mode</option>
+            <option value="dark">Dark Mode</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" onclick="closeModal('modal-phone')">Cancel</button>
+        <button class="btn btn-cyan" onclick="savePhoneProfile()">Save Phone Profile</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Social Modal -->
+  <div class="modal-overlay" id="modal-social">
+    <div class="modal-box">
+      <div class="modal-header">
+        <span id="modal-social-title">Create Social Profile</span>
+        <button class="action-btn" onclick="closeModal('modal-social')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <input type="hidden" id="edit-social-id">
+      <div class="form-group">
+        <label>Display Name</label>
+        <input type="text" id="social-name-input" class="form-control" placeholder="e.g. Malika">
+      </div>
+      <div class="form-group">
+        <label>Handle / Screen Name</label>
+        <input type="text" id="social-handle-input" class="form-control" placeholder="e.g. @deafsinger">
+      </div>
+      <div class="form-group">
+        <label>Avatar Letter or Image URL</label>
+        <input type="text" id="social-avatar-input" class="form-control" placeholder="M or https://...">
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" onclick="closeModal('modal-social')">Cancel</button>
+        <button class="btn btn-cyan" onclick="saveSocialProfile()">Save Profile</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Newspaper Profile Modal -->
+  <div class="modal-overlay" id="modal-paper">
+    <div class="modal-box">
+      <div class="modal-header">
+        <span id="modal-paper-title">Newspaper Publication Profile</span>
+        <button class="action-btn" onclick="closeModal('modal-paper')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <input type="hidden" id="edit-paper-id">
+      <div class="form-group">
+        <label>Publication Name</label>
+        <input type="text" id="paper-name-input" class="form-control" placeholder="e.g. The Daily Chronicle">
+      </div>
+      <div class="form-group">
+        <label>Print Era & Style</label>
+        <select id="paper-style-input" class="form-control">
+          <option value="vintage">Vintage Broadsheet (Aged Parchment)</option>
+          <option value="modern">Modern Digital Press (Clean White)</option>
+          <option value="new_media">2012 Era New Media Site</option>
+        </select>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" onclick="closeModal('modal-paper')">Cancel</button>
+        <button class="btn btn-cyan" onclick="savePaperProfile()">Save Press Profile</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Import Modal -->
+  <div class="modal-overlay" id="modal-import">
+    <div class="modal-box">
+      <div class="modal-header">
+        <span>Import JSON Project Data</span>
+        <button class="action-btn" onclick="closeModal('modal-import')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="form-group">
+        <label>Paste Story JSON below:</label>
+        <textarea id="import-json-textarea" class="form-control textarea-import"></textarea>
+      </div>
+      <div id="import-error-msg" class="import-error">Invalid JSON format string!</div>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" onclick="closeModal('modal-import')">Cancel</button>
+        <button class="btn btn-cyan" onclick="submitImportJSON()">Load Project</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let appState = {
+      admin: {
+        phones: [
+          { id: "phone_1", owner: "Ashley", type: "iphone", theme: "light", contacts: { "rob": "Jerk", "malika": "Malika" } },
+          { id: "phone_2", owner: "Rob", type: "android", theme: "dark", contacts: { "ashley": "Ashley", "malika": "Malika" } }
+        ],
+        socials: [
+          { id: "soc_1", name: "Malika", handle: "@deafsinger", avatar: "M" },
+          { id: "soc_2", name: "Rob", handle: "@rob_unfiltered", avatar: "R" }
+        ],
+        papers: [
+          { id: "paper_1", name: "THE DAILY CHRONICLE", style: "vintage" },
+          { id: "paper_2", name: "THE MODERN METRO", style: "modern" }
+        ]
+      },
+      page: {
+        title: "Chapter 1: The Incident",
+        nextPageUrl: "chapter2.html",
+        bgPreset: "#0c0c12",
+        width: "680px",
+        font: "-apple-system, BlinkMacSystemFont, sans-serif",
+        overlay: "none",
+        modules: [
+          {
+            id: "mod_head_1",
+            type: "heading",
+            level: "h1",
+            text: "CHAPTER ONE: THE DISCOVERY",
+            subtext: "October 14, 2026 - 11:42 PM",
+            align: "center"
+          },
+          {
+            id: "mod_msg_1",
+            type: "text_message",
+            phoneId: "phone_1",
+            chatTitle: "Groupchat: Besties",
+            messages: [
+              { id: "b1", isBanner: true, text: "October 14, 2026" },
+              { id: "b2", sender: "rob", text: "Did you find the document at the pier?", time: "11:40 PM", status: "" },
+              { id: "b3", sender: "ashley", text: "Yes. Parts of it are ||completely redacted||.", time: "11:42 PM", status: "Read 11:43 PM", hasImage: false, isBrokenImage: false, isTyping: false }
+            ]
+          },
+          {
+            id: "mod_news_1",
+            type: "newspaper",
+            paperId: "paper_1",
+            title: "THE DAILY CHRONICLE",
+            headline: "HARBOR INVESTIGATION SUSPENDED",
+            mainArticleUnfocused: true,
+            bodyCol1: "Authorities have abruptly halted the shoreline search near Pier 4...",
+            bodyCol2: "Witnesses were instructed to disregard previous statements...",
+            snippetTitle: "CLASSIFIED AD",
+            snippetText: "Lost silver key with emblem. High reward if returned.",
+            snippetUnfocused: false
+          }
+        ]
+      }
+    };
+
+    let selectedModuleId = null;
+
+    window.onload = () => {
+      const saved = localStorage.getItem('narrative_editor_state_v6');
+      if (saved) { try { appState = JSON.parse(saved); } catch(e) { console.error(e); } }
+      
+      syncPageSettingsUI();
+      renderAdminLists();
+      renderCanvas();
+    };
+
+    function saveState() {
+      localStorage.setItem('narrative_editor_state_v6', JSON.stringify(appState));
+      const badge = document.getElementById('save-badge');
+      badge.innerText = "Auto-saved";
+      setTimeout(() => badge.innerText = "Saved", 1200);
+    }
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+
+      document.getElementById('btn-' + tabId).classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+    }
+
+    function openModal(modalId) { document.getElementById(modalId).classList.add('active'); }
+    function closeModal(modalId) { document.getElementById(modalId).classList.remove('active'); }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    }
+    function parseRedactions(str) {
+    if (!str) return '';
+    const escaped = escapeHtml(str);
+    
+    // 1. Process ||redactions||
+    const redacted = escaped.replace(/\|\|(.*?)\|\|/g, '<span class="redacted" title="Click or hover to reveal">$1</span>');
+    
+    // 2. Convert newlines (\n) into HTML <br> tags for paragraph breaks
+    return redacted.replace(/\n/g, '<br>');
+    }
+
+    function syncPageSettingsUI() {
+      document.getElementById('page-title-field').value = appState.page.title || '';
+      document.getElementById('page-bg-preset').value = appState.page.bgPreset || '#0c0c12';
+      document.getElementById('page-width-select').value = appState.page.width || '680px';
+      document.getElementById('page-font-select').value = appState.page.font || '-apple-system, sans-serif';
+      document.getElementById('page-overlay-select').value = appState.page.overlay || 'none';
+      document.getElementById('page-next-url-field').value = appState.page.nextPageUrl || '';
+      applyPageStyles();
+    }
+
+    function applyPageStyles() {
+      const frame = document.getElementById('page-frame');
+      frame.style.backgroundColor = appState.page.bgPreset || '#0c0c12';
+      frame.style.maxWidth = appState.page.width || '680px';
+      frame.style.fontFamily = appState.page.font || '-apple-system, sans-serif';
+      frame.className = '';
+      if (appState.page.overlay && appState.page.overlay !== 'none') frame.classList.add(appState.page.overlay);
+      document.getElementById('footer-next-link').href = escapeHtml(appState.page.nextPageUrl);
+    }
+
+    function updatePageTitle(val) { appState.page.title = val; saveState(); }
+    function updateNextUrl(val) { appState.page.nextPageUrl = val; applyPageStyles(); saveState(); }
+    function applyPageBgPreset(val) { appState.page.bgPreset = val; applyPageStyles(); saveState(); }
+    function updatePageWidth(val) { appState.page.width = val; applyPageStyles(); saveState(); }
+    function updatePageFont(val) { appState.page.font = val; applyPageStyles(); saveState(); }
+    function updatePageOverlay(val) { appState.page.overlay = val; applyPageStyles(); saveState(); }
+
+    /* ADMIN MANAGERS */
+    function renderAdminLists() {
+      const phoneContainer = document.getElementById('admin-phones-list');
+      phoneContainer.innerHTML = '';
+      appState.admin.phones.forEach(p => {
+        phoneContainer.innerHTML += `
+          <div class="admin-card">
+            <div>
+              <div class="admin-card-title">${escapeHtml(p.owner)}</div>
+              <div class="admin-card-sub">${p.type.toUpperCase()} • ${p.theme} mode</div>
+            </div>
+            <div class="action-btn-group">
+              <button class="action-btn" onclick="openEditPhoneModal('${p.id}')"><i class="fa-solid fa-pen"></i></button>
+              <button class="action-btn del" onclick="deletePhoneProfile('${p.id}')"><i class="fa-solid fa-trash"></i></button>
+            </div>
+          </div>
+        `;
+      });
+
+      const socialContainer = document.getElementById('admin-socials-list');
+      socialContainer.innerHTML = '';
+      appState.admin.socials.forEach(s => {
+        socialContainer.innerHTML += `
+          <div class="admin-card">
+            <div>
+              <div class="admin-card-title">${escapeHtml(s.name)}</div>
+              <div class="admin-card-handle">${escapeHtml(s.handle)}</div>
+            </div>
+            <div class="action-btn-group">
+              <button class="action-btn" onclick="openEditSocialModal('${s.id}')"><i class="fa-solid fa-pen"></i></button>
+              <button class="action-btn del" onclick="deleteSocialProfile('${s.id}')"><i class="fa-solid fa-trash"></i></button>
+            </div>
+          </div>
+        `;
+      });
+
+      const paperContainer = document.getElementById('admin-papers-list');
+      paperContainer.innerHTML = '';
+      (appState.admin.papers || []).forEach(paper => {
+        paperContainer.innerHTML += `
+          <div class="admin-card">
+            <div>
+              <div class="admin-card-title">${escapeHtml(paper.name)}</div>
+              <div class="admin-card-style">${paper.style.toUpperCase()} ERA</div>
+            </div>
+            <div class="action-btn-group">
+              <button class="action-btn" onclick="openEditPaperModal('${paper.id}')"><i class="fa-solid fa-pen"></i></button>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    function openCreatePhoneModal() {
+      document.getElementById('modal-phone-title').innerText = "Create Phone Profile";
+      document.getElementById('edit-phone-id').value = "";
+      document.getElementById('phone-owner-input').value = "";
+      openModal('modal-phone');
+    }
+    function openEditPhoneModal(id) {
+      const p = appState.admin.phones.find(item => item.id === id);
+      if (!p) return;
+      document.getElementById('modal-phone-title').innerText = "Edit Phone Profile";
+      document.getElementById('edit-phone-id').value = p.id;
+      document.getElementById('phone-owner-input').value = p.owner;
+      document.getElementById('phone-type-input').value = p.type;
+      document.getElementById('phone-theme-input').value = p.theme;
+      openModal('modal-phone');
+    }
+    function savePhoneProfile() {
+      const editId = document.getElementById('edit-phone-id').value;
+      const owner = document.getElementById('phone-owner-input').value.trim();
+      const type = document.getElementById('phone-type-input').value;
+      const theme = document.getElementById('phone-theme-input').value;
+      if (!owner) return;
+      if (editId) {
+        const p = appState.admin.phones.find(item => item.id === editId);
+        if (p) { p.owner = owner; p.type = type; p.theme = theme; }
+      } else {
+        appState.admin.phones.push({ id: "phone_" + Date.now(), owner, type, theme, contacts: {} });
+      }
+      closeModal('modal-phone');
+      saveState(); renderAdminLists(); renderCanvas();
+    }
+    function deletePhoneProfile(id) {
+      if (appState.admin.phones.length <= 1) return;
+      appState.admin.phones = appState.admin.phones.filter(p => p.id !== id);
+      saveState(); renderAdminLists(); renderCanvas();
+    }
+
+    function openCreateSocialModal() {
+      document.getElementById('modal-social-title').innerText = "Create Social Profile";
+      document.getElementById('edit-social-id').value = "";
+      document.getElementById('social-name-input').value = "";
+      document.getElementById('social-handle-input').value = "";
+      openModal('modal-social');
+    }
+    function openEditSocialModal(id) {
+      const s = appState.admin.socials.find(item => item.id === id);
+      if (!s) return;
+      document.getElementById('modal-social-title').innerText = "Edit Social Profile";
+      document.getElementById('edit-social-id').value = s.id;
+      document.getElementById('social-name-input').value = s.name;
+      document.getElementById('social-handle-input').value = s.handle;
+      document.getElementById('social-avatar-input').value = s.avatar || "U";
+      openModal('modal-social');
+    }
+    function saveSocialProfile() {
+      const editId = document.getElementById('edit-social-id').value;
+      const name = document.getElementById('social-name-input').value.trim();
+      const handle = document.getElementById('social-handle-input').value.trim();
+      const avatar = document.getElementById('social-avatar-input').value.trim() || "U";
+      if (!name || !handle) return;
+      if (editId) {
+        const s = appState.admin.socials.find(item => item.id === editId);
+        if (s) { s.name = name; s.handle = handle; s.avatar = avatar; }
+      } else {
+        appState.admin.socials.push({ id: "soc_" + Date.now(), name, handle, avatar });
+      }
+      closeModal('modal-social');
+      saveState(); renderAdminLists(); renderCanvas();
+    }
+
+    function openCreatePaperModal() {
+      document.getElementById('modal-paper-title').innerText = "New Newspaper Publication";
+      document.getElementById('edit-paper-id').value = "";
+      document.getElementById('paper-name-input').value = "";
+      openModal('modal-paper');
+    }
+    function openEditPaperModal(id) {
+      const paper = (appState.admin.papers || []).find(p => p.id === id);
+      if (!paper) return;
+      document.getElementById('modal-paper-title').innerText = "Edit Press Profile";
+      document.getElementById('edit-paper-id').value = paper.id;
+      document.getElementById('paper-name-input').value = paper.name;
+      document.getElementById('paper-style-input').value = paper.style;
+      openModal('modal-paper');
+    }
+    function savePaperProfile() {
+      const editId = document.getElementById('edit-paper-id').value;
+      const name = document.getElementById('paper-name-input').value.trim();
+      const style = document.getElementById('paper-style-input').value;
+      if (!name) return;
+      if (!appState.admin.papers) appState.admin.papers = [];
+      if (editId) {
+        const p = appState.admin.papers.find(item => item.id === editId);
+        if (p) { p.name = name; p.style = style; }
+      } else {
+        appState.admin.papers.push({ id: "paper_" + Date.now(), name, style });
+      }
+      closeModal('modal-paper');
+      saveState(); renderAdminLists(); renderCanvas();
+    }
+
+    /* MODULE RENDERER */
+    function addModule(type) {
+      const newMod = { id: "mod_" + Date.now(), type };
+
+      if (type === 'heading') {
+        newMod.level = 'h2'; newMod.text = 'SECTION HEADING'; newMod.subtext = 'Timestamp'; newMod.align = 'center';
+      } else if (type === 'text_message') {
+        newMod.phoneId = appState.admin.phones[0]?.id || "phone_1";
+        newMod.chatTitle = "Groupchat";
+        newMod.messages = [
+          { id: "b_" + Date.now() + "_1", isBanner: true, text: "Today" },
+          { id: "b_" + Date.now() + "_2", sender: "rob", text: "Are you there?", time: "10:14 PM", status: "Read", isTyping: false }
+        ];
+      } else if (type === 'newspaper') {
+        newMod.paperId = appState.admin.papers?.[0]?.id || "paper_1";
+        newMod.title = 'THE DAILY CHRONICLE';
+        newMod.headline = 'BREAKING INVESTIGATION';
+        newMod.mainArticleUnfocused = false;
+        newMod.bodyCol1 = 'Column one text details...';
+        newMod.bodyCol2 = 'Column two text details...';
+        newMod.snippetTitle = 'SIDEBAR ANNOUNCEMENT';
+        newMod.snippetText = 'Small secondary column details...';
+        newMod.snippetUnfocused = false;
+      } else if (type === 'evidence_photo') {
+        newMod.style = 'polaroid'; newMod.caption = 'Evidence Item #402';
+        newMod.imgUrl = 'https://placehold.co/600x400/222222/a8dadc?text=Evidence+Photo'; newMod.isBroken = false;
+      } else if (type === 'broken_link') {
+        newMod.url = 'https://classified.org/file/deleted'; newMod.title = '404 - Resource Missing'; newMod.errorType = '404 Not Found';
+      } else if (type === 'email') {
+        newMod.subject = 'CONFIDENTIAL: Field Report'; newMod.from = 'agent@agency.gov'; newMod.to = 'director@agency.gov'; newMod.body = 'The ||evidence|| is secured.';
+      } else if (type === 'social') {
+        newMod.socialId = appState.admin.socials[0]?.id || "soc_1"; newMod.postText = 'Something feels off about this place...'; newMod.timestamp = '5m ago';
+      } else if (type === 'voicemail') {
+        newMod.caller = 'Unknown Number'; newMod.duration = '0:32'; newMod.transcript = 'Call me back immediately.';
+      }
+
+      appState.page.modules.push(newMod);
+      saveState(); renderCanvas(); selectModule(newMod.id);
+    }
+
+    function buildModuleHTML(mod) {
+      let content = '';
+
+      if (mod.type === 'heading') {
+        const alignClass = mod.align === 'center' ? 'text-center' : (mod.align === 'right' ? 'text-right' : 'text-left');
+        let levelClass = 'heading-h1';
+        if (mod.level === 'h2') levelClass = 'heading-h2';
+        if (mod.level === 'h3') levelClass = 'heading-h3';
+
+        content = `
+          <div class="heading-wrapper ${alignClass}">
+            <div class="${levelClass}">${escapeHtml(mod.text)}</div>
+            ${mod.subtext ? `<div class="heading-subtext">${escapeHtml(mod.subtext)}</div>` : ''}
+          </div>
+        `;
+      } else if (mod.type === 'text_message') {
+        const phone = appState.admin.phones.find(p => p.id === mod.phoneId) || appState.admin.phones[0] || { owner: 'Ashley', type: 'iphone', theme: 'light', contacts: {} };
+        const themeClass = `${phone.type}-${phone.theme}`;
+
+        content = `
+          <div class="phone-container ${themeClass}">
+            <div class="chat-header">${escapeHtml(mod.chatTitle)}</div>
+            ${mod.messages.map(m => {
+              if (m.isBanner) return `<div class="date-banner">${escapeHtml(m.text)}</div>`;
+              const isSent = m.sender.toLowerCase() === phone.owner.toLowerCase();
+              const senderName = phone.contacts[m.sender] || m.sender;
+
+              if (m.isTyping) {
+                return `
+                  <div class="msg-bubble ${isSent ? 'sent' : 'received'} typing-indicator">
+                    <span class="msg-sender">${escapeHtml(senderName)}</span>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                  </div>
+                `;
+              }
+
+              return `
+                <div class="msg-bubble ${isSent ? 'sent' : 'received'}">
+                  <span class="msg-sender">${escapeHtml(senderName)}</span>
+                  ${parseRedactions(m.text)}${m.hasImage ? (m.isBrokenImage ? 
+                    `<div class="broken-media-box"><i class="fa-solid fa-triangle-exclamation"></i> Attachment Failed to Load (404)</div>` :
+                    `<img src="${escapeHtml(m.imgUrl)}" class="msg-img-attachment" alt="Attachment">`
+                  ) : ''}
+                  <div class="msg-meta">
+                    <span>${escapeHtml(m.time || '')}</span>${m.status ? `<span>• ${escapeHtml(m.status)}</span>` : ''}
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        `;
+      } else if (mod.type === 'newspaper') {
+        const paper = (appState.admin.papers || []).find(p => p.id === mod.paperId) || { style: 'vintage' };
+        content = `
+          <div class="newspaper-block ${paper.style}">
+            <div class="newspaper-title ${paper.style}">${escapeHtml(mod.title)}</div>
+            
+            <div class="${mod.mainArticleUnfocused ? 'article-unfocused' : ''}">
+              <div class="newspaper-headline ${paper.style}">${escapeHtml(mod.headline)}</div>
+              <div class="newspaper-columns ${paper.style}">
+                <div>${parseRedactions(mod.bodyCol1)}</div>
+                <div>${parseRedactions(mod.bodyCol2)}</div>
+              </div>
+            </div>
+
+            ${mod.snippetTitle ? `
+              <div class="newspaper-snippet-box ${mod.snippetUnfocused ? 'article-unfocused' : ''}">
+                <div class="newspaper-snippet-title">${escapeHtml(mod.snippetTitle)}</div>
+                <div class="newspaper-snippet-text">${parseRedactions(mod.snippetText)}</div>
+              </div>
+            ` : ''}
+          </div>
+        `;
+      } else if (mod.type === 'evidence_photo') {
+        content = mod.isBroken ? `
+          <div class="broken-media-box p-30">
+            <i class="fa-solid fa-image broken-icon"></i>
+            <div>MEDIA ASSET CORRUPTED OR DELETED</div>
+            <div class="broken-subtext">${escapeHtml(mod.caption)}</div>
+          </div>
+        ` : `
+          <div class="polaroid-frame">
+            <img src="${escapeHtml(mod.imgUrl)}" class="polaroid-img" alt="Evidence">
+            <div class="polaroid-caption">${parseRedactions(mod.caption)}</div>
+          </div>
+        `;
+      } else if (mod.type === 'broken_link') {
+        content = `
+          <div class="link-preview-card">
+            <div class="link-icon-box"><i class="fa-solid fa-link-slash"></i></div>
+            <div>
+              <div class="link-error-label">${escapeHtml(mod.errorType || 'Connection Failed')}</div>
+              <div class="link-title">${escapeHtml(mod.title)}</div>
+              <div class="link-url">${escapeHtml(mod.url)}</div>
+            </div>
+          </div>
+        `;
+      } else if (mod.type === 'email') {
+        content = `
+          <div class="email-frame">
+            <div class="email-header">
+              <div class="email-subject">${escapeHtml(mod.subject)}</div>
+              <div><strong>From:</strong> ${escapeHtml(mod.from)}</div>
+              <div><strong>To:</strong> ${escapeHtml(mod.to)}</div>
+            </div>
+            <div>${parseRedactions(mod.body)}</div>
+          </div>
+        `;
+      } else if (mod.type === 'social') {
+        const soc = appState.admin.socials.find(s => s.id === mod.socialId) || appState.admin.socials[0] || { name: 'User', handle: '@user', avatar: 'U' };
+        content = `
+          <div class="social-frame">
+            <div class="social-user-header">
+              <div class="social-avatar">${soc.avatar || 'U'}</div>
+              <div>
+                <div class="social-author-name">${escapeHtml(soc.name)}</div>
+                <div class="social-handle">${escapeHtml(soc.handle)}</div>
+              </div>
+            </div>
+            <div>${parseRedactions(mod.postText)}</div>
+            <div class="social-timestamp">Posted ${escapeHtml(mod.timestamp)}</div>
+          </div>
+        `;
+      } else if (mod.type === 'voicemail') {
+        content = `
+          <div class="voicemail-frame">
+            <div class="voicemail-title">
+              <i class="fa-solid fa-microphone-lines"></i> Voicemail from ${escapeHtml(mod.caller)} (${escapeHtml(mod.duration)})
+            </div>
+            <div class="voicemail-transcript">
+              "${parseRedactions(mod.transcript)}"
+            </div>
+          </div>
+        `;
+      }
+
+      return content;
+    }
+
+    function renderCanvas() {
+      const canvas = document.getElementById('canvas');
+      canvas.innerHTML = '';
+
+      appState.page.modules.forEach((mod, index) => {
+        const wrap = document.createElement('div');
+        wrap.className = `placed-module ${mod.id === selectedModuleId ? 'selected' : ''}`;
+        wrap.onclick = (e) => { e.stopPropagation(); selectModule(mod.id); };
+
+        const toolbar = `
+          <div class="module-actions-bar">
+            <button class="action-btn" onclick="moveModule(${index}, -1)"><i class="fa-solid fa-arrow-up"></i></button>
+            <button class="action-btn" onclick="moveModule(${index}, 1)"><i class="fa-solid fa-arrow-down"></i></button>
+            <button class="action-btn" onclick="duplicateModule('${mod.id}')"><i class="fa-solid fa-clone"></i></button>
+            <button class="action-btn del" onclick="deleteModule('${mod.id}')"><i class="fa-solid fa-trash"></i></button>
+          </div>
+        `;
+
+        wrap.innerHTML = toolbar + buildModuleHTML(mod);
+        canvas.appendChild(wrap);
+      });
+    }
+
+    function moveModule(index, delta) {
+      const newIdx = index + delta;
+      if (newIdx < 0 || newIdx >= appState.page.modules.length) return;
+      const item = appState.page.modules.splice(index, 1)[0];
+      appState.page.modules.splice(newIdx, 0, item);
+      saveState(); renderCanvas();
+    }
+
+    function duplicateModule(id) {
+      const mod = appState.page.modules.find(m => m.id === id);
+      if (!mod) return;
+      const copy = JSON.parse(JSON.stringify(mod));
+      copy.id = "mod_" + Date.now();
+      appState.page.modules.push(copy);
+      saveState(); renderCanvas(); selectModule(copy.id);
+    }
+
+    function deleteModule(id) {
+      appState.page.modules = appState.page.modules.filter(m => m.id !== id);
+      if (selectedModuleId === id) selectedModuleId = null;
+      saveState(); renderCanvas(); renderInspector();
+    }
+
+    function selectModule(id) {
+      selectedModuleId = id;
+      renderCanvas(); renderInspector();
+    }
+
+    function renderInspector() {
+      const container = document.getElementById('inspector-content');
+      const mod = appState.page.modules.find(m => m.id === selectedModuleId);
+
+      if (!mod) {
+        container.innerHTML = `
+          <div class="inspector-empty">
+            <i class="fa-solid fa-arrow-pointer empty-icon"></i>
+            <p>Click any block on the canvas to edit its properties.</p>
+          </div>
+        `;
+        return;
+      }
+
+      let html = `<div class="inspector-wrapper">`;
+      html += `<div class="inspector-mod-type">Edit ${mod.type.replace('_', ' ')}</div>`;
+
+      if (mod.type === 'heading') {
+        html += `
+          <div class="form-group">
+            <label>Heading Style Level</label>
+            <select onchange="updateModProp('level', this.value)" class="form-control">
+              <option value="h1" ${mod.level === 'h1' ? 'selected':''}>H1 - Chapter Title (Large)</option>
+              <option value="h2" ${mod.level === 'h2' ? 'selected':''}>H2 - Scene Header (Medium)</option>
+              <option value="h3" ${mod.level === 'h3' ? 'selected':''}>H3 - Timestamp Divider</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Text</label><input type="text" value="${escapeHtml(mod.text)}" oninput="updateModProp('text', this.value)" class="form-control"></div>
+          <div class="form-group"><label>Subtext / Date</label><input type="text" value="${escapeHtml(mod.subtext)}" oninput="updateModProp('subtext', this.value)" class="form-control"></div>
+          <div class="form-group">
+            <label>Alignment</label>
+            <select onchange="updateModProp('align', this.value)" class="form-control">
+              <option value="center" ${mod.align === 'center' ? 'selected':''}>Center</option>
+              <option value="left" ${mod.align === 'left' ? 'selected':''}>Left</option>
+              <option value="right" ${mod.align === 'right' ? 'selected':''}>Right</option>
+            </select>
+          </div>
+        `;
+      } else if (mod.type === 'text_message') {
+        html += `
+          <div class="form-group">
+            <label>Device Owner Profile</label>
+            <select onchange="updateModProp('phoneId', this.value)" class="form-control">
+              ${appState.admin.phones.map(p => `<option value="${p.id}" ${p.id === mod.phoneId ? 'selected':''}>${escapeHtml(p.owner)} (${p.type})</option>`).join('')}
+            </select>
+          </div>
+          <div class="form-group"><label>Chat Title</label><input type="text" value="${escapeHtml(mod.chatTitle)}" oninput="updateModProp('chatTitle', this.value)" class="form-control"></div>
+
+          <div class="inspector-sub-section">
+            <div class="inspector-sub-header">
+              <span class="inspector-sub-title">Thread Message Bubbles</span>
+              <button onclick="insertBubbleAt('${mod.id}', 0)" class="btn btn-pink btn-xs">+ Add Top</button>
+            </div>
+
+            <div class="bubble-scroll-list">
+              ${mod.messages.map((m, i) => `
+                <div class="bubble-item-card">
+                  <div class="bubble-item-header">
+                    <span class="bubble-item-label">#${i + 1}${m.isBanner ? 'Date Banner' : 'Message'}</span>
+                    <div class="action-btn-group">
+                      <button onclick="moveBubble('${mod.id}',${i}, -1)" class="action-btn" title="Move Up"><i class="fa-solid fa-arrow-up"></i></button>
+                      <button onclick="moveBubble('${mod.id}',${i}, 1)" class="action-btn" title="Move Down"><i class="fa-solid fa-arrow-down"></i></button>
+                      <button onclick="insertBubbleAt('${mod.id}',${i + 1})" class="action-btn" title="Insert Below"><i class="fa-solid fa-plus"></i></button>
+                      <button onclick="deleteBubble('${mod.id}',${i})" class="action-btn del" title="Delete"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                  </div>
+
+                  <div class="form-group mb-4">
+                    <label class="label-xs"><input type="checkbox" ${m.isBanner ? 'checked':''} onchange="updateBubbleProp('${mod.id}',${i}, 'isBanner', this.checked)"> Date Banner</label>
+                  </div>
+
+                  ${!m.isBanner ? `
+                    <div class="form-group mb-4">
+                      <label class="label-xs">Sender Handle/Name</label>
+                      <input type="text" value="${escapeHtml(m.sender)}" oninput="updateBubbleProp('${mod.id}', ${i}, 'sender', this.value)" class="form-control" placeholder="e.g. rob">
+                    </div>
+                  ` : ''}
+
+                  <div class="form-group mb-4">
+                    <label class="label-xs">Text Content (Use ||text|| to redact)</label>
+                    <textarea oninput="updateBubbleProp('${mod.id}', ${i}, 'text', this.value)" class="form-control">${escapeHtml(m.text)}</textarea>
+                  </div>
+
+                  ${!m.isBanner ? `
+                    <div class="form-group mb-4">
+                      <label class="label-xs-checkbox">
+                        <input type="checkbox" ${m.isTyping ? 'checked':''} onchange="toggleTypingStatus(this.checked, ${i})">
+                        Show "Typing..." Indicator Dots
+                      </label>
+                    </div>
+
+                    <div class="grid-2 mb-4">
+                      <div>
+                        <label class="label-xs">Timestamp</label>
+                        <input type="text" value="${escapeHtml(m.time || '')}" oninput="updateBubbleProp('${mod.id}', ${i}, 'time', this.value)" class="form-control" placeholder="10:14 PM">
+                      </div>
+                      <div>
+                        <label class="label-xs">Read Receipt</label>
+                        <input type="text" value="${escapeHtml(m.status || '')}" oninput="updateBubbleProp('${mod.id}', ${i}, 'status', this.value)" class="form-control" placeholder="Read 10:15 PM">
+                      </div>
+                    </div>
+
+                    <div class="form-group mb-2">
+                      <label class="label-xs"><input type="checkbox" ${m.hasImage ? 'checked':''} onchange="updateBubbleProp('${mod.id}', ${i}, 'hasImage', this.checked)"> Attach Image</label>
+                    </div>
+
+                    ${m.hasImage ? `
+                      <div class="form-group mb-2">
+                        <input type="text" value="${escapeHtml(m.imgUrl || '')}" oninput="updateBubbleProp('${mod.id}',${i}, 'imgUrl', this.value)" class="form-control" placeholder="Image URL">
+                      </div>
+                      <div class="form-group mb-2">
+                        <label class="label-xs"><input type="checkbox" ${m.isBrokenImage ? 'checked':''} onchange="updateBubbleProp('${mod.id}',${i}, 'isBrokenImage', this.checked)"> Mark Image as Corrupted (404)</label>
+                      </div>
+                    ` : ''}
+                  ` : ''}
+                </div>
+              `).join('')}
+            </div>
+            <button onclick="insertBubbleAt('${mod.id}', ${mod.messages.length})" class="btn btn-secondary btn-full mt-6">+ Append Bottom Bubble</button>
+          </div>
+        `;
+      } else if (mod.type === 'newspaper') {
+        html += `
+          <div class="form-group">
+            <label>Select Publication Profile</label>
+            <select onchange="updateModProp('paperId', this.value)" class="form-control">
+              ${(appState.admin.papers || []).map(p => `<option value="${p.id}" ${p.id === mod.paperId ? 'selected':''}>${escapeHtml(p.name)} (${p.style})</option>`).join('')}
+            </select>
+          </div>
+          <div class="form-group"><label>Title Header</label><input type="text" value="${escapeHtml(mod.title)}" oninput="updateModProp('title', this.value)" class="form-control"></div>
+          
+          <div class="inspector-card-box">
+            <div class="card-box-title-cyan">Lead Article</div>
+            <div class="form-group"><label>Main Headline</label><input type="text" value="${escapeHtml(mod.headline)}" oninput="updateModProp('headline', this.value)" class="form-control"></div>
+            <div class="form-group"><label><input type="checkbox" ${mod.mainArticleUnfocused ? 'checked':''} onchange="updateModProp('mainArticleUnfocused', this.checked)"> Unfocus / Blur Main Headline</label></div>
+            <div class="form-group"><label>Column 1 Body</label><textarea oninput="updateModProp('bodyCol1', this.value)" class="form-control">${escapeHtml(mod.bodyCol1)}</textarea></div>
+            <div class="form-group"><label>Column 2 Body</label><textarea oninput="updateModProp('bodyCol2', this.value)" class="form-control">${escapeHtml(mod.bodyCol2)}</textarea></div>
+          </div>
+
+          <div class="inspector-card-box">
+            <div class="card-box-title-pink">Sidebar Snippet / Ad</div>
+            <div class="form-group"><label>Snippet Title</label><input type="text" value="${escapeHtml(mod.snippetTitle || '')}" oninput="updateModProp('snippetTitle', this.value)" class="form-control"></div>
+            <div class="form-group"><label>Snippet Text</label><textarea oninput="updateModProp('snippetText', this.value)" class="form-control">${escapeHtml(mod.snippetText || '')}</textarea></div>
+            <div class="form-group"><label><input type="checkbox" ${mod.snippetUnfocused ? 'checked':''} onchange="updateModProp('snippetUnfocused', this.checked)"> Unfocus / Blur Snippet</label></div>
+          </div>
+        `;
+      } else if (mod.type === 'evidence_photo') {
+        html += `
+          <div class="form-group"><label>Caption</label><input type="text" value="${escapeHtml(mod.caption)}" oninput="updateModProp('caption', this.value)" class="form-control"></div>
+          <div class="form-group"><label>Image URL</label><input type="text" value="${escapeHtml(mod.imgUrl)}" oninput="updateModProp('imgUrl', this.value)" class="form-control"></div>
+          <div class="form-group"><label><input type="checkbox" ${mod.isBroken ? 'checked':''} onchange="updateModProp('isBroken', this.checked)"> Mark as Corrupted Asset (404)</label></div>
+        `;
+      } else if (mod.type === 'broken_link') {
+        html += `
+          <div class="form-group"><label>URL</label><input type="text" value="${escapeHtml(mod.url)}" oninput="updateModProp('url', this.value)" class="form-control"></div>
+          <div class="form-group"><label>Title</label><input type="text" value="${escapeHtml(mod.title)}" oninput="updateModProp('title', this.value)" class="form-control"></div>
+          <div class="form-group"><label>Error Message</label><input type="text" value="${escapeHtml(mod.errorType)}" oninput="updateModProp('errorType', this.value)" class="form-control"></div>
+        `;
+      } else if (mod.type === 'email') {
+        html += `
+          <div class="form-group"><label>Subject</label><input type="text" value="${escapeHtml(mod.subject)}" oninput="updateModProp('subject', this.value)" class="form-control"></div>
+          <div class="form-group"><label>From</label><input type="text" value="${escapeHtml(mod.from)}" oninput="updateModProp('from', this.value)" class="form-control"></div>
+          <div class="form-group"><label>To</label><input type="text" value="${escapeHtml(mod.to)}" oninput="updateModProp('to', this.value)" class="form-control"></div>
+          <div class="form-group"><label>Body</label><textarea oninput="updateModProp('body', this.value)" class="form-control">${escapeHtml(mod.body)}</textarea></div>
+        `;
+      } else if (mod.type === 'social') {
+        html += `
+          <div class="form-group">
+            <label>Author Profile</label>
+            <select onchange="updateModProp('socialId', this.value)" class="form-control">
+              ${appState.admin.socials.map(s => `<option value="${s.id}" ${s.id === mod.socialId ? 'selected':''}>${escapeHtml(s.name)} (${s.handle})</option>`).join('')}
+            </select>
+          </div>
+          <div class="form-group"><label>Post Content</label><textarea oninput="updateModProp('postText', this.value)" class="form-control">${escapeHtml(mod.postText)}</textarea></div>
+          <div class="form-group"><label>Timestamp</label><input type="text" value="${escapeHtml(mod.timestamp)}" oninput="updateModProp('timestamp', this.value)" class="form-control"></div>
+        `;
+      } else if (mod.type === 'voicemail') {
+        html += `
+          <div class="form-group"><label>Caller</label><input type="text" value="${escapeHtml(mod.caller)}" oninput="updateModProp('caller', this.value)" class="form-control"></div>
+          <div class="form-group"><label>Duration</label><input type="text" value="${escapeHtml(mod.duration)}" oninput="updateModProp('duration', this.value)" class="form-control"></div>
+          <div class="form-group"><label>Transcript</label><textarea oninput="updateModProp('transcript', this.value)" class="form-control">${escapeHtml(mod.transcript)}</textarea></div>
+        `;
+      }
+
+      html += `</div>`;
+      container.innerHTML = html;
+    }
+
+    function updateModProp(prop, val) {
+      const mod = appState.page.modules.find(m => m.id === selectedModuleId);
+      if (mod) { mod[prop] = val; saveState(); renderCanvas(); }
+    }
+
+    function insertBubbleAt(modId, index) {
+      const mod = appState.page.modules.find(m => m.id === modId);
+      if (mod && mod.messages) {
+        const newBubble = { id: "b_" + Date.now(), sender: "rob", text: "New message text", time: "10:15 PM", status: "", isTyping: false };
+        mod.messages.splice(index, 0, newBubble);
+        saveState(); renderCanvas(); renderInspector();
+      }
+    }
+
+    function moveBubble(modId, index, delta) {
+      const mod = appState.page.modules.find(m => m.id === modId);
+      if (mod && mod.messages) {
+        const newIdx = index + delta;
+        if (newIdx < 0 || newIdx >= mod.messages.length) return;
+        const b = mod.messages.splice(index, 1)[0];
+        mod.messages.splice(newIdx, 0, b);
+        saveState(); renderCanvas(); renderInspector();
+      }
+    }
+
+    function updateBubbleProp(modId, index, key, val) {
+      const mod = appState.page.modules.find(m => m.id === modId);
+      if (mod && mod.messages[index]) {
+        mod.messages[index][key] = val;
+        saveState(); renderCanvas();
+      }
+    }
+
+    function toggleTypingStatus(isTyping, msgIndex) {
+      const mod = appState.page.modules.find(m => m.id === selectedModuleId);
+      if (mod && mod.type === 'text_message' && mod.messages && mod.messages[msgIndex]) {
+        mod.messages[msgIndex].isTyping = isTyping;
+        saveState(); renderCanvas(); renderInspector();
+      }
+    }
+
+    function deleteBubble(modId, index) {
+      const mod = appState.page.modules.find(m => m.id === modId);
+      if (mod && mod.messages.length > 1) {
+        mod.messages.splice(index, 1);
+        saveState(); renderCanvas(); renderInspector();
+      }
+    }
+
+    /* EXPORT & IMPORT ENGINE */
+    function exportJSON() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appState, null, 2));
+      const a = document.createElement('a');
+      a.setAttribute("href", dataStr);
+      a.setAttribute("download", `${(appState.page.title || 'story').toLowerCase().replace(/[^a-z0-9]/g, '_')}_data.json`);
+      a.click();
+    }
+
+    function submitImportJSON() {
+      const val = document.getElementById('import-json-textarea').value.trim();
+      const errBox = document.getElementById('import-error-msg');
+      try {
+        const parsed = JSON.parse(val);
+        if (parsed.admin && parsed.page) {
+          appState = parsed; errBox.style.display = 'none'; closeModal('modal-import');
+          syncPageSettingsUI(); renderAdminLists(); renderCanvas(); renderInspector(); saveState();
+        } else { errBox.style.display = 'block'; }
+      } catch(e) { errBox.style.display = 'block'; }
+    }
+
+    function exportStandaloneHTML() {
+      const renderedModules = appState.page.modules.map(mod => `
+        <div class="placed-module" style="margin-bottom: 24px;">
+          ${buildModuleHTML(mod)}
+        </div>
+      `).join('');
+
+      const html = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${escapeHtml(appState.page.title)}</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="narrative_editor.css">
+  <style>
+    body { background-color: #121212; color: #e0e0e0; font-family: ${appState.page.font || 'sans-serif'}; display: flex; justify-content: center; padding: 40px 16px; margin: 0; max-width: 100%; align-items: center; justify-content: center; }
+    .story-page { width: 100%; max-width: ${appState.page.width || '680px'}; background-color: ${appState.page.bgPreset || '#0c0c12'}; padding: 30px; border-radius: 12px; border: 1px solid #333; position: relative; overflow: auto;  }
+  </style>
+</head>
+<body>
+  <div class="story-page">
+    ${renderedModules}
+    <a href="${escapeHtml(appState.page.nextPageUrl)}" style="display: block; text-align: center; margin-top: 50px; padding-top: 20px; border-top: 1px solid #333; color: #a8dadc; text-decoration: none; font-weight: 700; font-size: 13px;">
+      Continue to Next Chapter &rarr;
+    </a>
+  </div>
+</body>
+</html>`;
+
+      const blob = new Blob([html], { type: 'text/html' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `${(appState.page.title || 'narrative_page').toLowerCase().replace(/[^a-z0-9]/g, '_')}.html`;
+      a.click();
+    }
+  </script>
+</body>
+</html>

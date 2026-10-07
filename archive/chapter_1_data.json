@@ -1,0 +1,1581 @@
+{
+  "version": 4,
+  "title": "Chapter 1",
+  "settings": {
+    "pageBackground": "#0c0c12",
+    "canvasBackground": "#0c0c12",
+    "canvasWidth": "standard",
+    "fontFamily": "system",
+    "overlayEffect": "none",
+    "overlays": {
+      "scanlines": false,
+      "vignette": false,
+      "grain": false,
+      "crtFlicker": false,
+      "paperTexture": false,
+      "reducedMotion": false
+    },
+    "readerEffects": {
+      "redactionReveal": true,
+      "imageGlitchOnHover": false,
+      "evidenceFocusBlur": true
+    },
+    "footerText": "Continue to Next Chapter →",
+    "footerUrl": "chapter2.html"
+  },
+  "meta": {
+    "createdAt": "2026-10-04T00:32:00.000Z",
+    "updatedAt": "2026-10-04T00:32:00.000Z",
+    "sourceSchema": "legacy-admin-page-export",
+    "chapterLabel": "Chapter 1"
+  },
+  "characters": [
+    {
+      "id": "char-ashley",
+      "name": "Ashley",
+      "shortName": "ASH",
+      "avatar": "A",
+      "primaryColor": "#ec7fae",
+      "softColor": "#ffe0ed",
+      "phoneModel": "iphone",
+      "phoneTheme": "light",
+      "phoneId": "phone_1",
+      "phoneContacts": {
+        "rob": "char-rob",
+        "malika": "char-malika"
+      },
+      "forumUsername": "",
+      "terminalUsername": "ashley",
+      "emailAddress": "ash@yorfriens.net",
+      "handwritingStyle": "cursive",
+      "tags": [
+        "protagonist",
+        "phone-owner"
+      ]
+    },
+    {
+      "id": "char-rob",
+      "name": "Rob",
+      "shortName": "ROB",
+      "avatar": "R",
+      "primaryColor": "#5b9df6",
+      "softColor": "#dceaff",
+      "phoneModel": "android",
+      "phoneTheme": "dark",
+      "phoneId": "phone_2",
+      "phoneContacts": {
+        "ashley": "char-ashley",
+        "malika": "char-malika"
+      },
+      "forumUsername": "rob_unfiltered",
+      "terminalUsername": "rob",
+      "emailAddress": "",
+      "handwritingStyle": "print",
+      "tags": [
+        "witness",
+        "phone-owner"
+      ]
+    },
+    {
+      "id": "char-malika",
+      "name": "Malika",
+      "shortName": "MAL",
+      "avatar": "M",
+      "primaryColor": "#ad7ce8",
+      "softColor": "#eee0ff",
+      "phoneModel": "iphone",
+      "phoneTheme": "dark",
+      "phoneId": "phone_1790873185174",
+      "phoneContacts": {},
+      "forumUsername": "deafsinger",
+      "terminalUsername": "malika",
+      "emailAddress": "",
+      "handwritingStyle": "clean-print",
+      "tags": [
+        "ally",
+        "phone-owner"
+      ]
+    },
+    {
+      "id": "char-josh",
+      "name": "Josh",
+      "shortName": "JOS",
+      "avatar": "J",
+      "primaryColor": "#d89754",
+      "softColor": "#ffead4",
+      "phoneModel": "",
+      "phoneTheme": "dark",
+      "phoneId": "",
+      "phoneContacts": {},
+      "forumUsername": "",
+      "terminalUsername": "",
+      "emailAddress": "",
+      "handwritingStyle": "print",
+      "tags": [
+        "missing",
+        "offscreen"
+      ]
+    },
+    {
+      "id": "char-officer-white",
+      "name": "Officer White",
+      "shortName": "OPW",
+      "avatar": "W",
+      "primaryColor": "#7d91a8",
+      "softColor": "#dce5ef",
+      "phoneModel": "",
+      "phoneTheme": "light",
+      "phoneId": "",
+      "phoneContacts": {},
+      "forumUsername": "",
+      "terminalUsername": "",
+      "emailAddress": "",
+      "handwritingStyle": "print",
+      "tags": [
+        "police",
+        "unverified"
+      ]
+    },
+    {
+      "id": "char-bev",
+      "name": "Bev",
+      "shortName": "BEV",
+      "avatar": "B",
+      "primaryColor": "#d46d78",
+      "softColor": "#ffe1e4",
+      "phoneModel": "",
+      "phoneTheme": "light",
+      "phoneId": "",
+      "phoneContacts": {},
+      "forumUsername": "",
+      "terminalUsername": "",
+      "emailAddress": "bev@yorfriens.net",
+      "handwritingStyle": "print",
+      "tags": [
+        "work",
+        "manager"
+      ]
+    },
+    {
+      "id": "char-hr",
+      "name": "HR",
+      "shortName": "HR",
+      "avatar": "HR",
+      "primaryColor": "#83909d",
+      "softColor": "#e5ebf0",
+      "phoneModel": "",
+      "phoneTheme": "light",
+      "phoneId": "",
+      "phoneContacts": {},
+      "forumUsername": "",
+      "terminalUsername": "",
+      "emailAddress": "hr@yorfriens.net",
+      "handwritingStyle": "print",
+      "tags": [
+        "organization",
+        "work"
+      ]
+    }
+  ],
+  "socialProfiles": [
+    {
+      "id": "social-deafsinger",
+      "ownerCharacterId": "char-malika",
+      "displayName": "Malika",
+      "handle": "@deafsinger",
+      "avatar": "M",
+      "platform": "microblog",
+      "primaryColor": "#ad7ce8",
+      "softColor": "#eee0ff",
+      "bio": "",
+      "followerLabel": ""
+    },
+    {
+      "id": "social-rob-unfiltered",
+      "ownerCharacterId": "char-rob",
+      "displayName": "Rob",
+      "handle": "@rob_unfiltered",
+      "avatar": "R",
+      "platform": "microblog",
+      "primaryColor": "#5b9df6",
+      "softColor": "#dceaff",
+      "bio": "",
+      "followerLabel": ""
+    }
+  ],
+  "newspaperProfiles": [
+    {
+      "id": "publication-the-daily",
+      "name": "The Daily",
+      "style": "modern",
+      "mastheadColor": "#202124",
+      "accentColor": "#d43d2f",
+      "cityLine": "",
+      "slogan": "",
+      "showAds": true
+    },
+    {
+      "id": "publication-new-that",
+      "name": "New That!",
+      "style": "buzz",
+      "mastheadColor": "#202124",
+      "accentColor": "#ee3322",
+      "cityLine": "",
+      "slogan": "",
+      "showAds": true
+    }
+  ],
+  "modules": [
+    {
+      "id": "mod_1790870051856",
+      "type": "voice-message",
+      "ui": {
+        "collapsed": false
+      },
+      "meta": {
+        "timelineDate": "",
+        "displayDate": "",
+        "location": "",
+        "sourceCharacterId": "char-rob",
+        "reliability": "direct",
+        "tags": [
+          "voice-message",
+          "rob",
+          "urgent"
+        ],
+        "evidenceId": "",
+        "unlockState": "visible"
+      },
+      "styleOverrides": {
+        "borderColor": "#003175",
+        "backgroundColor": "#0d192b"
+      },
+      "data": {
+        "phoneOwnerCharacterId": "char-ashley",
+        "callerCharacterId": "char-rob",
+        "callerName": "Rob",
+        "phoneNumber": "",
+        "callId": "VM-1790870051856",
+        "messageStatus": "played",
+        "receivedAt": "",
+        "duration": "0:48",
+        "audioUrl": "",
+        "waveformSeed": [
+          18,
+          34,
+          75,
+          42,
+          27,
+          61,
+          82,
+          45,
+          31,
+          68,
+          22,
+          48
+        ],
+        "transcriptionEnabled": true,
+        "transcript": "Wake the fuck up em wake up wake up wake up fuck fuck fuck fuck fuck what the fuck man, hey de jam en paz, i'm on the phone, I don't have cash on me right now will you--",
+        "callbackEnabled": true,
+        "showPhoneNumber": false,
+        "showCallId": true
+      }
+    },
+    {
+      "id": "mod_1790870113172",
+      "type": "voice-message",
+      "ui": {
+        "collapsed": false
+      },
+      "meta": {
+        "timelineDate": "",
+        "displayDate": "",
+        "location": "",
+        "sourceCharacterId": "char-rob",
+        "reliability": "direct",
+        "tags": [
+          "voice-message",
+          "rob",
+          "josh",
+          "emergency"
+        ],
+        "evidenceId": "",
+        "unlockState": "visible"
+      },
+      "styleOverrides": {
+        "borderColor": "#003175",
+        "backgroundColor": "#0d192b"
+      },
+      "data": {
+        "phoneOwnerCharacterId": "char-ashley",
+        "callerCharacterId": "char-rob",
+        "callerName": "Rob",
+        "phoneNumber": "",
+        "callId": "VM-1790870113172",
+        "messageStatus": "played",
+        "receivedAt": "",
+        "duration": "0:12",
+        "audioUrl": "",
+        "waveformSeed": [
+          66,
+          88,
+          95,
+          84,
+          71,
+          44,
+          32,
+          18
+        ],
+        "transcriptionEnabled": true,
+        "transcript": "Ash, pick up. They're going to fun king kill josh",
+        "callbackEnabled": true,
+        "showPhoneNumber": false,
+        "showCallId": true
+      }
+    },
+    {
+      "id": "mod_1790870147396",
+      "type": "scene-heading",
+      "ui": {
+        "collapsed": false
+      },
+      "meta": {
+        "timelineDate": "2004-09-01T00:00:00",
+        "displayDate": "September 1",
+        "location": "",
+        "sourceCharacterId": "",
+        "reliability": "direct",
+        "tags": [
+          "chapter",
+          "warning",
+          "josh"
+        ],
+        "evidenceId": "",
+        "unlockState": "visible"
+      },
+      "styleOverrides": {
+        "borderColor": "transparent",
+        "backgroundColor": "transparent"
+      },
+      "data": {
+        "kicker": "September 1",
+        "title": "THEY ARE GOING TO KILL JOSH",
+        "subtitle": "",
+        "alignment": "center",
+        "level": "h1"
+      }
+    },
+    {
+      "id": "mod_1790870396126",
+      "type": "phone-thread",
+      "ui": {
+        "collapsed": false
+      },
+      "meta": {
+        "timelineDate": "",
+        "displayDate": "",
+        "location": "",
+        "sourceCharacterId": "char-ashley",
+        "reliability": "direct",
+        "tags": [
+          "text-message",
+          "ashley",
+          "rob"
+        ],
+        "evidenceId": "",
+        "unlockState": "visible"
+      },
+      "styleOverrides": {
+        "borderColor": "transparent",
+        "backgroundColor": "transparent"
+      },
+      "data": {
+        "ownerCharacterId": "char-ashley",
+        "phoneId": "phone_1",
+        "contactCharacterId": "char-rob",
+        "contactLabel": "rob aka jerk",
+        "subtitle": "Messages",
+        "dateLabel": "",
+        "theme": "light",
+        "messages": [
+          {
+            "id": "b_1790873072417",
+            "kind": "message",
+            "senderCharacterId": "char-rob",
+            "text": "i can pay if you want but if you don't...",
+            "time": "",
+            "status": ""
+          },
+          {
+            "id": "msg_1790870396126_02",
+            "kind": "message",
+            "senderCharacterId": "char-ashley",
+            "text": "yeah i'm sorry :( i'm just really on edge about work and so can't take any time off rn. you guys have fun tho!!",
+            "time": "",
+            "status": ""
+          },
+          {
+            "id": "msg_1790870396126_03",
+            "kind": "message",
+            "senderCharacterId": "char-rob",
+            "text": "it's ok, we just miss u dude. next tiem.",
+            "time": "10:13 PM",
+            "status": "Read 10:15 PM"
+          },
+          {
+            "id": "msg_1790870396126_04",
+            "kind": "date-banner",
+            "text": "Monday, August 1 - 4:23 AM"
+          },
+          {
+            "id": "msg_1790870396126_05",
+            "kind": "message",
+            "senderCharacterId": "char-rob",
+            "text": "ash pick up your goddamn phone",
+            "time": "",
+            "status": ""
+          },
+          {
+            "id": "msg_1790870396126_06",
+            "kind": "message",
+            "senderCharacterId": "char-rob",
+            "text": "it's an emergency",
+            "time": "4:23 AM",
+            "status": "Read 9:02 AM"
+          }
+        ]
+      }
+    },
+    {
+      "id": "mod_1790870204233",
+      "type": "phone-thread",
+      "ui": {
+        "collapsed": false
+      },
+      "meta": {
+        "timelineDate": "",
+        "displayDate": "",
+        "location": "Ashley workplace",
+        "sourceCharacterId": "char-ashley",
+        "reliability": "direct",
+        "tags": [
+          "text-message",
+          "ashley",
+          "rob",
+          "work"
+        ],
+        "evidenceId": "",
+        "unlockState": "visible"
+      },
+      "styleOverrides": {
+        "borderColor": "transparent",
+        "backgroundColor": "transparent"
+      },
+      "data": {
+        "ownerCharacterId": "char-ashley",
+        "phoneId": "phone_1",
+        "contactCharacterId": "char-rob",
+        "contactLabel": "rob aka jerk",
+        "subtitle": "Messages",
+        "dateLabel": "",
+        "theme": "light",
+        "messages": [
+          {
+            "id": "msg_1790870204233_01",
+            "kind": "message",
+            "senderCharacterId": "char-rob",
+            "text": "ashley are you fucking kidding me",
+            "time": "",
+            "status": ""
+          },
+          {
+            "id": "msg_1790870204233_02",
+            "kind": "message",
+            "senderCharacterId": "char-rob",
+            "text": "did you seriously go to work",
+            "time": "",
+            "status": ""
+          },
+          {
+            "id": "msg_1790870204233_03",
+            "kind": "message",
+            "senderCharacterId": "char-ashley",
+            "text": "i was running late and you called me at 4am",
+            "time": "",
+            "status": ""
+          },
+          {
+            "id": "msg_1790870204233_04",
+            "kind": "message",
+            "senderCharacterId": "char-ashley",
+            "text": "so like. whatever drunken sitch you and josh have gotten yourselves into can wait until i'm at lunch",
+            "time": "",
+            "status": ""
+          }
+        ]
+      }
+    },
+    {
+      "id": "mod_1790870316458",
+      "type": "email-document",
+      "ui": {
+        "collapsed": false
+      },
+      "meta": {
+        "timelineDate": "",
+        "displayDate": "",
+        "location": "Yorfriens office",
+        "sourceCharacterId": "char-bev",
+        "reliability": "direct",
+        "tags": [
+          "email",
+          "work",
+          "pip",
+          "ashley"
+        ],
+        "evidenceId": "",
+        "unlockState": "visible"
+      },
+      "styleOverrides": {
+        "borderColor": "#cbd5e1",
+        "backgroundColor": "#ffffff"
+      },
+      "data": {
+        "documentStyle": "email",
+        "classification": "",
+        "fromName": "Bev",
+        "fromAddress": "bev@yorfriens.net",
+        "toAddress": "ash@yorfriens.net",
+        "subject": "re: your performance review",
+        "date": "",
+        "body": "Hi Ashley! I just wanted to check in on your performance review -- as you know, we need to make sure you understand the PIP and the issues you've been having. I saw you were late into the office again this morning! I know it can be difficult, just try your best.\nBev",
+        "signature": "Bev"
+      }
+    },
+    {
+      "id": "mod_1790880365736",
+      "type": "email-document",
+      "ui": {
+        "collapsed": false
+      },
+      "meta": {
+        "timelineDate": "",
+        "displayDate": "",
+        "location": "Yorfriens office",
+        "sourceCharacterId": "char-hr",
+        "reliability": "official",
+        "tags": [
+          "email",
+          "hr",
+          "work",
+          "phone-policy"
+        ],
+        "evidenceId": "",
+        "unlockState": "visible"
+      },
+      "styleOverrides": {
+        "borderColor": "",
+        "backgroundColor": ""
+      },
+      "data": {
+        "documentStyle": "email",
+        "classification": "INTERNAL NOTICE",
+        "fromName": "HR",
+        "fromAddress": "hr@yorfriens.net",
+        "toAddress": "all@yorfriens.net",
+        "subject": "HR: To All Employees",
+        "date": "",
+        "body": "Hello, all employees: \n\nJust a real quick clarification on our super simple rules about Cell Phone use during the work day! We are of course flexible, but ideally you shouldn't have your phone out on your desk during the work day. Part of having a grown up culture is having grown up rules around cell phone use! We trust you, but everybody needs a little reminder sometimes.\n\nDon't forget, we're all friens here!\n\nHR",
+        "signature": "Human Resources"
+      }
+    },
+    {
+      "id": "mod_1790870584489",
+      "type": "phone-thread",
+      "ui": {
+        "collapsed": false
+      },
+      "meta": {
+        "timelineDate": "2004-09-01T08:32:00",
+        "displayDate": "8:32 AM",
+        "location": "",
+        "sourceCharacterId": "char-rob",
+        "reliability": "direct",
+        "tags": [
+          "text-message",
+          "rob",
+          "josh",
+          "video",
+          "emergency"
+        ],
+        "evidenceId": "",
+        "unlockState": "visible"
+      },
+      "styleOverrides": {
+        "borderColor": "transparent",
+        "backgroundColor": "transparent"
+      },
+      "data": {
+        "ownerCharacterId": "char-ashley",
+        "phoneId": "phone_1",
+        "contactCharacterId": "char-rob",
+        "contactLabel": "rob aka jerk",
+        "subtitle": "Messages",
+        "dateLabel": "",
+        "theme": "light",
+        "messages": [
+          {
+            "id": "msg_1790870584489_01",
+            "kind": "message",
+            "senderCharacterId": "char-rob",
+            "text": "they're going to kill josh",
+            "time": "",
+            "status": ""
+          },
+          {
+            "id": "msg_1790870584489_02",
+            "kind": "message",
+            "senderCharacterId": "char-ashley",
+            "text": "did you take your meds this morning?",
+            "time": "",
+            "status": ""
+          },
+          {
+            "id": "msg_1790870584489_03",
+            "kind": "date-banner",
+            "text": "8:32 AM"
+          },
+          {
+            "id": "msg_1790870584489_04",
+            "kind": "message",
+            "senderCharacterId": "char-rob",
+            "text": "goddamn the video is too long and my stupid fucking phone won't send it",
+            "time": "",
+            "status": ""
+          },
+          {
+            "id": "msg_1790870584489_05",
+            "kind": "message",
+            "senderCharacterId": "char-rob",
+            "text": "josh's landlord called me at 3am because cops broke down his apartment door and took him",
+            "time": "",
+            "status": ""
+          },
+          {
+            "id": "msg_1790870584489_06",
+            "kind": "message",
+            "senderCharacterId": "char-ashley",
+            "text": "not funny",
+            "time": "",
+            "status": ""
+          },
+          {
+            "id": "msg_1790870584489_07",
+            "kind": "message",
+            "senderCharacterId": "char-rob",
+            "text": "ash for once in my life i'm not being fucking funny",
+            "time": "",
+            "status": ""
+          }
+        ]
+      }
+    },
+    {
+      "id": "mod_1790870706217",
+      "type": "voice-message",
+      "ui": {
+        "collapsed": false
+      },
+      "meta": {
+        "timelineDate": "",
+        "displayDate": "",
+        "location": "Ashley workplace",
+        "sourceCharacterId": "char-ashley",
+        "reliability": "direct",
+        "tags": [
+          "voice-message",
+          "ashley",
+          "work",
+          "lunch"
+        ],
+        "evidenceId": "",
+        "unlockState": "visible"
+      },
+      "styleOverrides": {
+        "borderColor": "#334155",
+        "backgroundColor": "#1e293b"
+      },
+      "data": {
+        "phoneOwnerCharacterId": "char-rob",
+        "callerCharacterId": "char-ashley",
+        "callerName": "Ashley",
+        "phoneNumber": "",
+        "callId": "VM-1790870706217",
+        "messageStatus": "played",
+        "receivedAt": "",
+        "duration": "0:24",
+        "audioUrl": "",
+        "waveformSeed": [
+          18,
+          28,
+          52,
+          65,
+          47,
+          71,
+          34,
+          21,
+          43
+        ],
+        "transcriptionEnabled": true,
+        "transcript": "rob i'm calling you back, i have like ten minutes before lunch ends. i can't keep texting under the desk tho, my boss is going to notice.",
+        "callbackEnabled": true,
+        "showPhoneNumber": false,
+        "showCallId": true
+      }
+    },
+    {
+      "id": "mod_1790871185597",
+      "type": "broken-link",
+      "ui": {
+        "collapsed": false
+      },
+      "meta": {
+        "timelineDate": "",
+        "displayDate": "",
+        "location": "",
+        "sourceCharacterId": "char-rob",
+        "reliability": "direct",
+        "tags": [
+          "failed-upload",
+          "android",
+          "video",
+          "broken-link"
+        ],
+        "evidenceId": "",
+        "unlockState": "visible"
+      },
+      "styleOverrides": {
+        "borderColor": "",
+        "backgroundColor": ""
+      },
+      "data": {
+        "style": "browser",
+        "browserTitle": "404 - File too large",
+        "url": "Android",
+        "errorCode": "404",
+        "headline": "File too large to send.",
+        "detail": "The requested media attachment could not be delivered from this Android device."
+      }
+    },
+    {
+      "id": "mod_1790870905040",
+      "type": "phone-thread",
+      "ui": {
+        "collapsed": false
+      },
+      "meta": {
+        "timelineDate": "2004-09-01T13:13:00",
+        "displayDate": "1:13 PM",
+        "location": "Josh's apartment",
+        "sourceCharacterId": "char-rob",
+        "reliability": "direct",
+        "tags": [
+          "text-message",
+          "ashley",
+          "rob",
+          "josh",
+          "lucy"
+        ],
+        "evidenceId": "",
+        "unlockState": "visible"
+      },
+      "styleOverrides": {
+        "borderColor": "transparent",
+        "backgroundColor": "transparent"
+      },
+      "data": {
+        "ownerCharacterId": "char-rob",
+        "phoneId": "phone_2",
+        "contactCharacterId": "char-ashley",
+        "contactLabel": "ashley",
+        "subtitle": "Messages",
+        "dateLabel": "",
+        "theme": "dark",
+        "messages": [
+          {
+            "id": "msg_1790870905040_01",
+            "kind": "message",
+            "senderCharacterId": "char-rob",
+            "text": "shit i missed you",
+            "time": "1:13 PM",
+            "status": ""
+          },
+          {
+            "id": "msg_1790870905040_02",
+            "kind": "message",
+            "senderCharacterId": "char-rob",
+            "text": "i went over to the apartment to grab lucy",
+            "time": "",
+            "status": ""
+          },
+          {
+            "id": "msg_1790870905040_03",
+            "kind": "message",
+            "senderCharacterId": "char-rob",
+            "text": "my landlady said she'd let me keep her at least until this is sorted out",
+            "time": "",
+            "status": ""
+          },
+          {
+            "id": "msg_1790870905040_04",
+            "kind": "message",
+            "senderCharacterId": "char-ashley",
+            "text": "what the fuck is going on rob",
+            "time": "",
+            "status": ""
+          },
+          {
+            "id": "msg_1790870905040_05",
+            "kind": "message",
+            "senderCharacterId": "char-rob",
+            "text": "so you finally saw the video huh",
+            "time": "",
+            "status": ""
+          },
+          {
+            "id": "msg_1790870905040_06",
+            "kind": "message",
+            "senderCharacterId": "char-rob",
+            "text": "yeah idk what the hell is going on",
+            "time": "",
+            "status": ""
+          },
+          {
+            "id": "msg_1790870905040_07",
+            "kind": "message",
+            "senderCharacterId": "char-ashley",
+            "text": "why do you keep saying they're going to kill josh",
+            "time": "",
+            "status": ""
+          },
+          {
+            "id": "msg_1790870905040_08",
+            "kind": "message",
+            "senderCharacterId": "char-rob",
+            "text": "i'll send the screenshot",
+            "time": "",
+            "status": ""
+          }
+        ]
+      }
+    },
+    {
+      "id": "mod_1790871291313",
+      "type": "voice-message",
+      "ui": {
+        "collapsed": false
+      },
+      "meta": {
+        "timelineDate": "",
+        "displayDate": "",
+        "location": "South Street",
+        "sourceCharacterId": "char-officer-white",
+        "reliability": "unverified",
+        "tags": [
+          "voice-message",
+          "police",
+          "no-caller-id",
+          "south-street",
+          "josh"
+        ],
+        "evidenceId": "",
+        "unlockState": "visible"
+      },
+      "styleOverrides": {
+        "borderColor": "",
+        "backgroundColor": ""
+      },
+      "data": {
+        "phoneOwnerCharacterId": "char-ashley",
+        "callerCharacterId": "char-officer-white",
+        "callerName": "No Caller ID",
+        "phoneNumber": "555-555-0xxx",
+        "callId": "VM-1790871291313",
+        "messageStatus": "new",
+        "receivedAt": "",
+        "duration": "0:32",
+        "audioUrl": "",
+        "waveformSeed": [
+          16,
+          25,
+          39,
+          58,
+          42,
+          72,
+          31,
+          47,
+          62,
+          24
+        ],
+        "transcriptionEnabled": true,
+        "transcript": "This is Officer White with the Police Department. I'm returning your call about the incident on South Street this afternoon. The suspect was brought into custody ready for execution in 40 days. If you have further questions, you can reach an officer at our main station line: 555-555-0xxx",
+        "callbackEnabled": true,
+        "showPhoneNumber": true,
+        "showCallId": true
+      }
+    },
+    {
+      "id": "mod_1790871593390",
+      "type": "scene-heading",
+      "ui": {
+        "collapsed": false
+      },
+      "meta": {
+        "timelineDate": "",
+        "displayDate": "",
+        "location": "",
+        "sourceCharacterId": "char-ashley",
+        "reliability": "direct",
+        "tags": [
+          "reaction"
+        ],
+        "evidenceId": "",
+        "unlockState": "visible"
+      },
+      "styleOverrides": {
+        "borderColor": "",
+        "backgroundColor": ""
+      },
+      "data": {
+        "kicker": "",
+        "title": "what the fuck",
+        "subtitle": "",
+        "alignment": "center",
+        "level": "h2"
+      }
+    },
+    {
+      "id": "mod_1790871859141",
+      "type": "phone-thread",
+      "ui": {
+        "collapsed": false
+      },
+      "meta": {
+        "timelineDate": "2004-09-01T13:32:00",
+        "displayDate": "1:32 PM",
+        "location": "",
+        "sourceCharacterId": "char-rob",
+        "reliability": "direct",
+        "tags": [
+          "text-message",
+          "rob",
+          "ashley"
+        ],
+        "evidenceId": "",
+        "unlockState": "visible"
+      },
+      "styleOverrides": {
+        "borderColor": "",
+        "backgroundColor": ""
+      },
+      "data": {
+        "ownerCharacterId": "char-ashley",
+        "phoneId": "phone_1",
+        "contactCharacterId": "char-rob",
+        "contactLabel": "rob aka jerk",
+        "subtitle": "Messages",
+        "dateLabel": "",
+        "theme": "light",
+        "messages": [
+          {
+            "id": "msg_1790871859141_01",
+            "kind": "message",
+            "senderCharacterId": "char-rob",
+            "text": "Are you there?",
+            "time": "1:32 PM",
+            "status": "Read"
+          }
+        ]
+      }
+    },
+    {
+      "id": "mod_1790871916350",
+      "type": "phone-thread",
+      "ui": {
+        "collapsed": false
+      },
+      "meta": {
+        "timelineDate": "",
+        "displayDate": "",
+        "location": "",
+        "sourceCharacterId": "char-rob",
+        "reliability": "direct",
+        "tags": [
+          "text-message",
+          "rob",
+          "ashley"
+        ],
+        "evidenceId": "",
+        "unlockState": "visible"
+      },
+      "styleOverrides": {
+        "borderColor": "",
+        "backgroundColor": ""
+      },
+      "data": {
+        "ownerCharacterId": "char-ashley",
+        "phoneId": "phone_1",
+        "contactCharacterId": "char-rob",
+        "contactLabel": "rob aka jerk",
+        "subtitle": "Messages",
+        "dateLabel": "",
+        "theme": "light",
+        "messages": [
+          {
+            "id": "msg_1790871916350_01",
+            "kind": "message",
+            "senderCharacterId": "char-rob",
+            "text": "ash?",
+            "time": "",
+            "status": ""
+          }
+        ]
+      }
+    },
+    {
+      "id": "mod_1790878900445",
+      "type": "phone-thread",
+      "ui": {
+        "collapsed": false
+      },
+      "meta": {
+        "timelineDate": "",
+        "displayDate": "",
+        "location": "",
+        "sourceCharacterId": "char-ashley",
+        "reliability": "direct",
+        "tags": [
+          "text-message",
+          "ashley",
+          "malika",
+          "help"
+        ],
+        "evidenceId": "",
+        "unlockState": "visible"
+      },
+      "styleOverrides": {
+        "borderColor": "",
+        "backgroundColor": ""
+      },
+      "data": {
+        "ownerCharacterId": "char-ashley",
+        "phoneId": "phone_1",
+        "contactCharacterId": "char-malika",
+        "contactLabel": "Malika (do not call!!)",
+        "subtitle": "Messages",
+        "dateLabel": "",
+        "theme": "light",
+        "messages": [
+          {
+            "id": "b_1790878756066",
+            "kind": "date-banner",
+            "text": "June 6 - 01:31 AM"
+          },
+          {
+            "id": "b_1790878690355_2",
+            "kind": "message",
+            "senderCharacterId": "char-malika",
+            "text": "outside",
+            "time": "01:31 AM",
+            "status": "Read"
+          },
+          {
+            "id": "b_1790878725939",
+            "kind": "message",
+            "senderCharacterId": "char-ashley",
+            "text": "👍",
+            "time": "01:31 AM",
+            "status": ""
+          },
+          {
+            "id": "b_1790878690355_1",
+            "kind": "date-banner",
+            "text": "Today"
+          },
+          {
+            "id": "b_1790878845682",
+            "kind": "message",
+            "senderCharacterId": "char-ashley",
+            "text": "mal i need your help",
+            "time": "1:33 PM",
+            "status": ""
+          },
+          {
+            "id": "msg_1790878900445_06",
+            "kind": "typing",
+            "senderCharacterId": "char-malika",
+            "text": "",
+            "time": "",
+            "status": ""
+          }
+        ]
+      }
+    },
+    {
+      "id": "mod_1790878921897",
+      "type": "phone-thread",
+      "ui": {
+        "collapsed": false
+      },
+      "meta": {
+        "timelineDate": "",
+        "displayDate": "",
+        "location": "",
+        "sourceCharacterId": "char-ashley",
+        "reliability": "direct",
+        "tags": [
+          "text-message",
+          "ashley",
+          "malika",
+          "help"
+        ],
+        "evidenceId": "",
+        "unlockState": "visible"
+      },
+      "styleOverrides": {
+        "borderColor": "",
+        "backgroundColor": ""
+      },
+      "data": {
+        "ownerCharacterId": "char-ashley",
+        "phoneId": "phone_1",
+        "contactCharacterId": "char-malika",
+        "contactLabel": "Malika (do not call!!)",
+        "subtitle": "Messages",
+        "dateLabel": "",
+        "theme": "light",
+        "messages": [
+          {
+            "id": "b_1790878756066_copy_01",
+            "kind": "date-banner",
+            "text": "June 6 - 01:31 AM"
+          },
+          {
+            "id": "b_1790878690355_2_copy_01",
+            "kind": "message",
+            "senderCharacterId": "char-malika",
+            "text": "outside",
+            "time": "01:31 AM",
+            "status": "Read"
+          },
+          {
+            "id": "b_1790878725939_copy_01",
+            "kind": "message",
+            "senderCharacterId": "char-ashley",
+            "text": "👍",
+            "time": "01:31 AM",
+            "status": ""
+          },
+          {
+            "id": "b_1790878690355_1_copy_01",
+            "kind": "date-banner",
+            "text": "Today"
+          },
+          {
+            "id": "b_1790878845682_copy_01",
+            "kind": "message",
+            "senderCharacterId": "char-ashley",
+            "text": "mal i need your help",
+            "time": "1:33 PM",
+            "status": ""
+          }
+        ]
+      }
+    },
+    {
+      "id": "mod_1790879988124",
+      "type": "phone-thread",
+      "ui": {
+        "collapsed": false
+      },
+      "meta": {
+        "timelineDate": "",
+        "displayDate": "",
+        "location": "",
+        "sourceCharacterId": "char-ashley",
+        "reliability": "direct",
+        "tags": [
+          "text-message",
+          "ashley",
+          "malika",
+          "josh",
+          "help"
+        ],
+        "evidenceId": "",
+        "unlockState": "visible"
+      },
+      "styleOverrides": {
+        "borderColor": "",
+        "backgroundColor": ""
+      },
+      "data": {
+        "ownerCharacterId": "char-ashley",
+        "phoneId": "phone_1",
+        "contactCharacterId": "char-malika",
+        "contactLabel": "Malika (do not call!!)",
+        "subtitle": "Messages",
+        "dateLabel": "",
+        "theme": "light",
+        "messages": [
+          {
+            "id": "b_1790878756066_copy_02",
+            "kind": "date-banner",
+            "text": "June 6 - 01:31 AM"
+          },
+          {
+            "id": "b_1790878690355_2_copy_02",
+            "kind": "message",
+            "senderCharacterId": "char-malika",
+            "text": "outside",
+            "time": "01:31 AM",
+            "status": "Read"
+          },
+          {
+            "id": "b_1790878725939_copy_02",
+            "kind": "message",
+            "senderCharacterId": "char-ashley",
+            "text": "👍",
+            "time": "01:31 AM",
+            "status": ""
+          },
+          {
+            "id": "b_1790878690355_1_copy_02",
+            "kind": "date-banner",
+            "text": "Today"
+          },
+          {
+            "id": "b_1790878845682_copy_02",
+            "kind": "message",
+            "senderCharacterId": "char-ashley",
+            "text": "mal i need your help",
+            "time": "1:33 PM",
+            "status": ""
+          },
+          {
+            "id": "b_1790879994772",
+            "kind": "message",
+            "senderCharacterId": "char-ashley",
+            "text": "it's not for me.",
+            "time": "",
+            "status": ""
+          },
+          {
+            "id": "b_1790880193045",
+            "kind": "message",
+            "senderCharacterId": "char-ashley",
+            "text": "mal",
+            "time": "",
+            "status": ""
+          },
+          {
+            "id": "b_1790880033252",
+            "kind": "message",
+            "senderCharacterId": "char-ashley",
+            "text": "it's for josh. you liked him, right",
+            "time": "",
+            "status": ""
+          },
+          {
+            "id": "b_1790880064619",
+            "kind": "message",
+            "senderCharacterId": "char-malika",
+            "text": "Well he is the only one of your friends who bothered learning any sign language. And I like his dog.",
+            "time": "",
+            "status": ""
+          }
+        ]
+      }
+    },
+    {
+      "id": "mod_1790882205108",
+      "type": "scene-heading",
+      "ui": {
+        "collapsed": false
+      },
+      "meta": {
+        "timelineDate": "2004-09-01T15:52:00",
+        "displayDate": "September 1 | 3:52 PM",
+        "location": "",
+        "sourceCharacterId": "char-ashley",
+        "reliability": "direct",
+        "tags": [
+          "chapter-marker",
+          "rob",
+          "contact-name"
+        ],
+        "evidenceId": "",
+        "unlockState": "visible"
+      },
+      "styleOverrides": {
+        "borderColor": "",
+        "backgroundColor": ""
+      },
+      "data": {
+        "kicker": "",
+        "title": "September 1 | 3:52 PM",
+        "subtitle": "Ashley changes Rob's name in her phone",
+        "alignment": "center",
+        "level": "h3"
+      }
+    },
+    {
+      "id": "mod_1790883211770",
+      "type": "phone-thread",
+      "ui": {
+        "collapsed": false
+      },
+      "meta": {
+        "timelineDate": "2004-09-01T15:52:00",
+        "displayDate": "September 1 | 3:52 PM",
+        "location": "",
+        "sourceCharacterId": "char-ashley",
+        "reliability": "direct",
+        "tags": [
+          "group-chat",
+          "ashley",
+          "rob",
+          "malika",
+          "josh",
+          "jail"
+        ],
+        "evidenceId": "",
+        "unlockState": "visible"
+      },
+      "styleOverrides": {
+        "borderColor": "",
+        "backgroundColor": ""
+      },
+      "data": {
+        "ownerCharacterId": "char-ashley",
+        "phoneId": "phone_1",
+        "contactCharacterId": "",
+        "contactLabel": "Groupchat",
+        "subtitle": "3 participants",
+        "dateLabel": "",
+        "theme": "light",
+        "groupParticipants": [
+          "char-ashley",
+          "char-rob",
+          "char-malika"
+        ],
+        "messages": [
+          {
+            "id": "b_1790882953743_1",
+            "kind": "date-banner",
+            "text": "Today"
+          },
+          {
+            "id": "b_1790882953743_2",
+            "kind": "message",
+            "senderCharacterId": "char-ashley",
+            "text": "i caught mal up on everything. she went down to the jail. created this thread so we could all talk to each other",
+            "time": "",
+            "status": ""
+          },
+          {
+            "id": "b_1790883002695",
+            "kind": "message",
+            "senderCharacterId": "char-rob",
+            "text": "I went down there earlier, they wouldn't even let me in. i'm heading to the county clerk's office",
+            "time": "",
+            "status": ""
+          },
+          {
+            "id": "b_1790883093354",
+            "kind": "message",
+            "senderCharacterId": "char-malika",
+            "text": "Don't bother. They close at 4 on the dot, and will not let you in during the end of the work day.",
+            "time": "",
+            "status": ""
+          },
+          {
+            "id": "b_1790883147177",
+            "kind": "message",
+            "senderCharacterId": "char-rob",
+            "text": "wtf",
+            "time": "",
+            "status": ""
+          },
+          {
+            "id": "b_1790883158815",
+            "kind": "typing",
+            "senderCharacterId": "char-rob",
+            "text": "",
+            "time": "",
+            "status": ""
+          }
+        ]
+      }
+    },
+    {
+      "id": "mod_1790883324612",
+      "type": "phone-thread",
+      "ui": {
+        "collapsed": false
+      },
+      "meta": {
+        "timelineDate": "2004-09-01T15:52:00",
+        "displayDate": "September 1 | 3:52 PM",
+        "location": "",
+        "sourceCharacterId": "char-malika",
+        "reliability": "direct",
+        "tags": [
+          "group-chat",
+          "ashley",
+          "rob",
+          "malika",
+          "josh",
+          "jail"
+        ],
+        "evidenceId": "",
+        "unlockState": "visible"
+      },
+      "styleOverrides": {
+        "borderColor": "",
+        "backgroundColor": ""
+      },
+      "data": {
+        "ownerCharacterId": "char-ashley",
+        "phoneId": "phone_1",
+        "contactCharacterId": "",
+        "contactLabel": "Groupchat",
+        "subtitle": "3 participants",
+        "dateLabel": "",
+        "theme": "light",
+        "groupParticipants": [
+          "char-ashley",
+          "char-rob",
+          "char-malika"
+        ],
+        "messages": [
+          {
+            "id": "b_1790883093354_copy_01",
+            "kind": "message",
+            "senderCharacterId": "char-malika",
+            "text": "Don't bother. They close at 4 on the dot, and will not let you in during the end of the work day.",
+            "time": "",
+            "status": ""
+          },
+          {
+            "id": "b_1790883147177_copy_01",
+            "kind": "message",
+            "senderCharacterId": "char-rob",
+            "text": "wtf",
+            "time": "",
+            "status": ""
+          },
+          {
+            "id": "b_1790883158815_copy_01",
+            "kind": "typing",
+            "senderCharacterId": "char-rob",
+            "text": "",
+            "time": "",
+            "status": ""
+          },
+          {
+            "id": "b_1790883233241",
+            "kind": "message",
+            "senderCharacterId": "char-malika",
+            "text": "This is certainly a misunderstanding. We live in the US. Even with ICE they're not going to execute someone without due process.",
+            "time": "",
+            "status": ""
+          },
+          {
+            "id": "b_1790883279608",
+            "kind": "message",
+            "senderCharacterId": "char-ashley",
+            "text": "I guess you're right... this is probably some misunderstanding.",
+            "time": "",
+            "status": ""
+          }
+        ]
+      }
+    },
+    {
+      "id": "mod_1790882953743",
+      "type": "phone-thread",
+      "ui": {
+        "collapsed": false
+      },
+      "meta": {
+        "timelineDate": "2004-09-01T15:52:00",
+        "displayDate": "September 1 | 3:52 PM",
+        "location": "County jail",
+        "sourceCharacterId": "char-malika",
+        "reliability": "direct",
+        "tags": [
+          "group-chat",
+          "ashley",
+          "rob",
+          "malika",
+          "josh",
+          "jail"
+        ],
+        "evidenceId": "",
+        "unlockState": "visible"
+      },
+      "styleOverrides": {
+        "borderColor": "",
+        "backgroundColor": ""
+      },
+      "data": {
+        "ownerCharacterId": "char-ashley",
+        "phoneId": "phone_1",
+        "contactCharacterId": "",
+        "contactLabel": "Groupchat",
+        "subtitle": "3 participants",
+        "dateLabel": "",
+        "theme": "light",
+        "groupParticipants": [
+          "char-ashley",
+          "char-rob",
+          "char-malika"
+        ],
+        "messages": [
+          {
+            "id": "b_1790883279608_copy_02",
+            "kind": "message",
+            "senderCharacterId": "char-ashley",
+            "text": "I guess you're right... this is probably some misunderstanding.",
+            "time": "",
+            "status": ""
+          },
+          {
+            "id": "b_1790883410538",
+            "kind": "message",
+            "senderCharacterId": "char-ashley",
+            "text": "it's just. really scary though.",
+            "time": "",
+            "status": ""
+          },
+          {
+            "id": "b_1790883344419",
+            "kind": "message",
+            "senderCharacterId": "char-rob",
+            "text": "they broke into his house",
+            "time": "",
+            "status": ""
+          },
+          {
+            "id": "b_1790883361543",
+            "kind": "message",
+            "senderCharacterId": "char-malika",
+            "text": "I am heading into the jail now. I'll report back A S A P.",
+            "time": "",
+            "status": ""
+          }
+        ]
+      }
+    }
+  ]
+}
